@@ -1,77 +1,102 @@
-/* ============================================================
-   styles.css — this is YOURS to change. That is the point.
-   Every value below is a decision somebody made. Change one,
-   commit, and look at what happened.
-   ============================================================ */
-
-/* The custom properties. Change a colour ONCE here and it
-   changes everywhere it is used further down. */
 :root {
-  --ink:        #1a1a1a;   /* body text */
-  --muted:      #5a6472;   /* quieter text */
-  --accent:     #0a6373;   /* links and rules — make this yours */
-  --paper:      #ffffff;
-  --line:       #e2e6ec;
-  --measure:    34rem;     /* how wide a line of text gets before it wraps */
+  --ink: #f5efe2;
+  --muted: #d9c7a5;
+  --accent: #d72638;
+  --accent-strong: #f4c95d;
+  --paper: #120c12;
+  --paper-soft: #22161f;
+  --line: #4d2a35;
+  --measure: 38rem;
 }
 
-/* A sensible reset. Without border-box, padding makes boxes
-   wider than you asked for, and nothing lines up. */
-*, *::before, *::after { box-sizing: border-box; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0 auto;
   padding: 3rem 1.25rem 4rem;
   max-width: var(--measure);
-  background: var(--paper);
+  background:
+    radial-gradient(circle at top, rgba(123, 42, 54, 0.75), transparent 30%),
+    linear-gradient(180deg, #1a1018 0%, var(--paper) 100%);
   color: var(--ink);
-  font: 1rem/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font: 1rem/1.7 "Segoe UI", Tahoma, sans-serif;
+}
+
+header {
+  padding: 1.5rem 1.25rem;
+  border: 2px solid var(--line);
+  border-radius: 1rem;
+  background: rgba(34, 22, 31, 0.9);
+  box-shadow: 0 0 20px rgba(212, 38, 59, 0.35);
 }
 
 h1 {
   margin: 0;
-  font-size: 2.15rem;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  font-size: 2.35rem;
+  line-height: 1.1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+  text-shadow: 0 0 12px rgba(244, 201, 93, 0.7);
 }
 
 .tagline {
-  margin: 0.5rem 0 0;
+  margin: 0.75rem 0 0;
   color: var(--muted);
   font-size: 1.05rem;
+  font-style: italic;
 }
 
 h2 {
-  margin: 2.75rem 0 0.75rem;
-  padding-bottom: 0.4rem;
+  margin: 2.6rem 0 0.8rem;
+  padding-bottom: 0.45rem;
   border-bottom: 1px solid var(--line);
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-strong);
 }
 
-ul { margin: 0; padding-left: 1.1rem; }
-li { margin-bottom: 0.6rem; }
+ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+li {
+  margin-bottom: 0.7rem;
+}
+
+strong {
+  color: #f7dfab;
+}
 
 a {
-  color: var(--accent);
-  text-underline-offset: 3px;
+  color: var(--accent-strong);
+  text-underline-offset: 4px;
 }
-a:hover { text-decoration: none; }
+
+a:hover {
+  text-decoration: none;
+}
 
 footer {
-  margin-top: 3.5rem;
+  margin-top: 3.25rem;
   padding-top: 1rem;
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.85rem;
 }
 
-/* Someone reading this on a phone is the common case, not the
-   edge case. Test it there before you call the page done. */
 @media (max-width: 30rem) {
-  body { padding-top: 2rem; }
-  h1   { font-size: 1.8rem; }
+  body {
+    padding-top: 2rem;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+  }
 }

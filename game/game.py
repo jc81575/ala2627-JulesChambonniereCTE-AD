@@ -1,152 +1,84 @@
-# ============================================================
-#  THE VAULT — a text adventure
-#
-#  This already works. Run it before you change anything:
-#
-#      python game.py
-#
-#  You are not building a game from nothing. You are taking one
-#  that runs and making it yours. That is how real software gets
-#  written — you almost never start from an empty file.
-#
-#  Everything in here uses only what you already know from last
-#  week: print(), input(), if / elif / else, and a while loop.
-#  There is nothing new to learn before you can start.
-# ============================================================
 
+player_name: str = ""
+room: str = "eiffel tower"
+has_baguette: bool = False
+moves: int = 0
 
-# ---- 1. STATE ------------------------------------------------
-# "State" is just the stuff the game has to remember while it runs.
-# Change these and the game starts differently — try it.
-
-player_name = ""          # we ask for this at the start
-room = "hall"             # where the player is right now
-has_key = False           # True or False — do they have the key?
-moves = 0                 # how many turns they have taken
-
-
-# ---- 2. HELPERS ----------------------------------------------
-# A function is a name for some lines you want to use more than
-# once. `def` makes one. Writing this once beats pasting it into
-# every room.
 
 def say(text):
-    """Print a message, then one blank line, so the screen breathes.
-
-    Use plain print() for lines that belong TOGETHER, and say() for the
-    last line of the thought. Calling say() on every line puts a gap
-    between each one and the screen looks broken.
-    """
     print(text)
     print()
 
 
 def ask():
-    """Ask the player what they want to do and hand back a tidy answer.
-
-    .strip() removes spaces they typed by accident.
-    .lower() means GO NORTH, go north and Go North all work the same.
-    Without these two, your game feels broken even when your logic is right.
-    """
     return input("> ").strip().lower()
 
 
-# ---- 3. THE OPENING ------------------------------------------
-
 print("=" * 44)
-print("           THE VAULT")
+print("       FRANCE")
 print("=" * 44)
 print()
 
-player_name = input("What is your name, explorer? ").strip()
+player_name = input("What is your name, young tourist ?").strip()
 if player_name == "":
-    player_name = "Nobody"          # they just pressed enter
+    player_name = "Ratatouille"
 
 print()
 print("Welcome, " + player_name + ".")
-print("You are standing in a dusty hall. There is a door NORTH")
-print("and a rug on the floor you could LOOK under.")
-say("Type HELP if you get stuck, or QUIT to give up.")
+print("You stand infront the eiffel tower in the middle of Paris.")
+print("A Taxi way leads EAST,  and a beautiful restaurant hums nearby.")
+say("The air crackles with strange pollution . Type HELP if you get stuck, or QUIT to walk away.")
 
-
-# ---- 4. THE GAME LOOP ----------------------------------------
-# while True means "keep going forever". The only way out is break.
-# Every turn: ask, then decide what that answer means.
 
 while True:
     command = ask()
     moves = moves + 1
 
-    # -- commands that work anywhere ------------------------
     if command == "quit":
-        say("You walk away. " + player_name + " lasted " + str(moves) + " moves.")
+        say("You leave the city, but the baguette smell follows you. " + player_name + " lasted " + str(moves) + " moves.")
         break
 
     elif command == "help":
-        say("Try: LOOK, NORTH, SOUTH, TAKE KEY, OPEN VAULT, QUIT")
+        say("Try: LOOK, EAST, WEST, TAKE BAGUETTE, OPEN DOOR, QUIT")
 
-    # -- the hall -------------------------------------------
-    elif room == "hall":
+    elif room == "eiffel tower":
         if command == "look":
-            if has_key:
-                say("Just a rug, and the hole where the key was.")
+            if has_baguette:
+                say("The alley glows with lingering energy, but the baguette is gone.")
             else:
-                say("Under the rug: a small brass KEY.")
+                say("une baguette bien racit sur le sol humide de paris.")
 
-        elif command == "take key":
-            if has_key:
-                say("You already have it.")
+        elif command == "take baguette":
+            if has_baguette:
+                say("You already carry the baguette. Its warmth is comforting in your hand.")
             else:
-                has_key = True
-                say("You pocket the key. It is colder than it should be.")
+                has_baguette = True
+                say("You lift the baguette. A burst of warmth spreads through your fingers.")
 
-        elif command == "north":
-            room = "vault"
-            print("You step into a room with a huge steel door. The VAULT.")
-            say("There is a way back SOUTH.")
+        elif command == "east":
+            room = "restaurant"
+            print("You follow ratatouille into a big restaurant.")
+            say("The air grows warmer, and a shadowy path leads back WEST.")
 
         else:
-            say("You cannot do that here.")
+            say("That move feels wrong for a tourist in this city.")
 
-    # -- the vault ------------------------------------------
-    elif room == "vault":
+    elif room == "restaurant":
         if command == "look":
-            say("A steel door with a small keyhole. It is shut.")
+            say("a beautiful door is infront of you, will you open it ?")
 
-        elif command == "south":
-            room = "hall"
-            say("Back in the dusty hall.")
+        elif command == "west":
+            room = "eiffel tower"
+            say("You return to the Eiffel Tower beneath the Parisian sky.")
 
-        elif command == "open vault":
-            if has_key:
-                print("The key turns. The door swings open.")
-                print("Inside: absolutely nothing. Someone beat you here.")
-                say("You win anyway, " + player_name + " — in " + str(moves) + " moves.")
+        elif command == "open door":
+            if has_baguette:
+                print("The baguette locks into the portal. The room erupts in golden light.")
+                print("Beyond it, a hidden giant croissant awaits.")
+                say("You become a legend, " + player_name + " — in " + str(moves) + " moves.")
                 break
             else:
-                say("It is locked. You need a key.")
+                say("The door remains shut. It needs the baguette.")
 
         else:
             say("You cannot do that here.")
-
-
-# ============================================================
-#  NOW MAKE IT YOURS
-#
-#  Do these in order. Run the game after EVERY one — if it
-#  breaks you will know exactly which change did it.
-#
-#  1. Change the room descriptions so it is your world, not mine.
-#
-#  2. Add a third room. Copy the `elif room == "vault":` block,
-#     change the room name, and give the hall a way to reach it.
-#
-#  3. Add something to pick up, the way has_key works. A lamp?
-#     Then make one room too dark to LOOK in without it.
-#
-#  4. Add a limit: if moves gets past 20, something happens.
-#
-#  5. Give the player a real choice with two different endings.
-#
-#  COMMIT AFTER EACH ONE. That is your undo button.
-# ============================================================

@@ -15,7 +15,7 @@ Open `game.py`, then either:
 Output shows up in the terminal panel at the bottom. Play all the way through — **win it, and lose
 it.** You cannot improve something you have not seen work.
 
-> Commands: `look`, `take key`, `north`, `south`, `open vault`, `help`, `quit`
+> Commands: `look`, `take crystal`, `east`, `west`, `open portal`, `help`, `quit`
 
 ---
 
@@ -46,4 +46,9 @@ five things and then run it, and you are hunting.
 | Nothing happens when I type | Your `elif` never matched. Check spelling, and that it is lower case. |
 | It never stops | Your `while` has no reachable `break`. |
 
-**Read the last line of the error first** — it gives you the line number. Python is being helpful.
+**Read the last line of the error first** — it gives you the line number. Python is being helpful.                    
+
+
+
+
+
