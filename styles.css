@@ -1,11 +1,11 @@
 :root {
-  --ink: #2d0c2e;
-  --muted: #aaa49b;
+  --ink: #f8f0df;
+  --muted: #c8b7b2;
   --accent: #a855f7;
-  --accent-strong: #ac61fd;
-  --paper: #171717;
-  --paper-soft: #22211f;
-  --line: #4a4843;
+  --accent-strong: #e6b85c;
+  --paper: #1c1019;
+  --paper-soft: #2d1728;
+  --line: #6a3048;
   --measure: 76rem;
 }
 
@@ -21,7 +21,8 @@ body {
   background:
     linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px),
-    radial-gradient(circle at 80% 8%, rgba(168, 85, 247, .18), transparent 25%),
+    radial-gradient(circle at 80% 8%, rgba(168, 85, 247, .2), transparent 25%),
+    radial-gradient(circle at 12% 72%, rgba(106, 48, 72, .28), transparent 28%),
     var(--paper);
   background-size: 64px 64px, 64px 64px, auto, auto;
   color: var(--ink);
