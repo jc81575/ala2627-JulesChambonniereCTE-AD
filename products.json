@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "name": "Baguette Classique",
+    "price": 2.5,
+    "description": "Une délicieuse baguette française traditionnelle",
+    "category": "Pains",
+    "image": "🥖",
+    "stock": 50
+  },
+  {
+    "id": 2,
+    "name": "Croissant Beurre",
+    "price": 1.8,
+    "description": "Croissant feuilleté au beurre frais",
+    "category": "Viennoiseries",
+    "image": "🥐",
+    "stock": 30
+  },
+  {
+    "id": 3,
+    "name": "Pain au Chocolat",
+    "price": 2.0,
+    "description": "Pain feuilleté avec deux barres de chocolat",
+    "category": "Viennoiseries",
+    "image": "🍫",
+    "stock": 25
+  },
+  {
+    "id": 4,
+    "name": "Tarte aux Pommes",
+    "price": 4.5,
+    "description": "Tarte pâtissière aux pommes fraîches",
+    "category": "Pâtisseries",
+    "image": "🥧",
+    "stock": 15
+  },
+  {
+    "id": 5,
+    "name": "Éclair au Café",
+    "price": 3.5,
+    "description": "Éclair délicat au goût de café",
+    "category": "Pâtisseries",
+    "image": "💄",
+    "stock": 20
+  },
+  {
+    "id": 6,
+    "name": "Macarons Assortis",
+    "price": 8.0,
+    "description": "Boîte de 6 macarons de couleurs variées",
+    "category": "Pâtisseries",
+    "image": "🎨",
+    "stock": 10
+  }
+]

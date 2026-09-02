@@ -1,6 +1,6 @@
 :root {
-  --ink: #f5efe2;
-  --muted: #d9c7a5;
+  --ink: #644a12;
+  --muted: #8b6825;
   --accent: #d72638;
   --accent-strong: #f4c95d;
   --paper: #120c12;
@@ -21,7 +21,7 @@ body {
   max-width: var(--measure);
   background:
     radial-gradient(circle at top, rgba(123, 42, 54, 0.75), transparent 30%),
-    linear-gradient(180deg, #1a1018 0%, var(--paper) 100%);
+    linear-gradient(180deg, #9b2f85 0%, var(--paper) 100%);
   color: var(--ink);
   font: 1rem/1.7 "Segoe UI", Tahoma, sans-serif;
 }

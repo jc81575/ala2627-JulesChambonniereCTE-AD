@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Commandes - Boulangerie Jules</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🥖 Boulangerie Jules</h1>
+            <ul class="nav-links">
+                <li><a href="/">Boutique</a></li>
+                <li><a href="/orders">Commandes</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Historique des commandes</h1>
+
+        {% if orders %}
+            <div class="orders-list">
+                {% for order in orders %}
+                    <div class="order-card">
+                        <div class="order-header">
+                            <h3>Commande #{{ order.id }}</h3>
+                            <span class="order-status">{{ order.status }}</span>
+                        </div>
+                        <div class="order-details">
+                            <p><strong>Client:</strong> {{ order.customer_name }}</p>
+                            <p><strong>Email:</strong> {{ order.email }}</p>
+                            <p><strong>Date:</strong> {{ order.date[:10] }}</p>
+                            <p><strong>Adresse:</strong> {{ order.address }}</p>
+                        </div>
+                        <div class="order-items">
+                            <h4>Articles:</h4>
+                            <ul>
+                                {% for item in order.items %}
+                                    <li>{{ item.image }} {{ item.name }} x{{ item.quantity }} - {{ (item.price * item.quantity)|round(2) }} €</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="order-total">
+                            <strong>Total: {{ order.total|round(2) }} €</strong>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-state">
+                <p>Aucune commande trouvée.</p>
+                <a href="/" class="btn">Retourner à la boutique</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Boulangerie Jules. Tous droits réservés.</p>
+    </footer>
+
+    <style>
+        .orders-list {
+            display: grid;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .order-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            background: #f9f9f9;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 1rem;
+        }
+
+        .order-status {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #d72638;
+            color: white;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+    </style>
+</body>
+</html>

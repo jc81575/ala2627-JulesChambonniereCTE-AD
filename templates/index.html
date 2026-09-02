@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥖 Boulangerie Jules - Vente en ligne</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🥖 Boulangerie Jules</h1>
+            <ul class="nav-links">
+                <li><a href="/">Boutique</a></li>
+                <li><a href="/orders">Commandes</a></li>
+                <li><a href="/admin">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Bienvenue à la Boulangerie Jules</h1>
+            <p>Nos délicieuses pâtisseries et pains fraîchement cuits</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="products-grid" id="productsGrid">
+                <!-- Les produits seront chargés ici par JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Panier flottant -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>🛒 Panier</h2>
+            <button class="close-cart" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Votre panier est vide</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total:</strong>
+                <span id="cartTotal">0,00 €</span>
+            </div>
+            <button class="checkout-btn" onclick="goToCheckout()" id="checkoutBtn" disabled>
+                Passer la commande
+            </button>
+        </div>
+    </div>
+
+    <!-- Bouton flottant du panier -->
+    <button class="cart-toggle" id="cartToggle" onclick="toggleCart()">
+        🛒 <span id="cartCount">0</span>
+    </button>
+
+    <footer>
+        <p>&copy; 2026 Boulangerie Jules. Tous droits réservés.</p>
+        <p>Transformé en site e-commerce - Août 2026</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

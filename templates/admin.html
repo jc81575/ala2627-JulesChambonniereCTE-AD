@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - Boulangerie Jules</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .admin-tab-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .admin-tab-btn.active {
+            color: #d72638;
+            border-bottom-color: #d72638;
+        }
+
+        .admin-tab {
+            display: none;
+        }
+
+        .admin-tab.active {
+            display: block;
+        }
+
+        .products-table, .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .products-table th, .products-table td,
+        .orders-table th, .orders-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .products-table th, .orders-table th {
+            background: #f0f0f0;
+            font-weight: bold;
+        }
+
+        .products-table tr:hover, .orders-table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .btn-small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            background: #d72638;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-small:hover {
+            background: #b81e2b;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #d72638, #f4c95d);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .stat-card p {
+            margin: 0.5rem 0 0;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🥖 Boulangerie Jules - Admin</h1>
+            <ul class="nav-links">
+                <li><a href="/">Boutique</a></li>
+                <li><a href="/orders">Commandes</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container admin-container">
+        <h1>Panneau d'Administration</h1>
+
+        <!-- Statistiques -->
+        <div class="stats">
+            <div class="stat-card">
+                <h3>{{ products|length }}</h3>
+                <p>Produits</p>
+            </div>
+            <div class="stat-card">
+                <h3>{{ orders|length }}</h3>
+                <p>Commandes</p>
+            </div>
+            <div class="stat-card">
+                <h3>{{ "%.2f"|format(orders|map(attribute='total')|sum) }} €</h3>
+                <p>Chiffre d'affaires</p>
+            </div>
+        </div>
+
+        <!-- Onglets -->
+        <div class="admin-tabs">
+            <button class="admin-tab-btn active" onclick="switchTab('products')">
+                📦 Produits
+            </button>
+            <button class="admin-tab-btn" onclick="switchTab('orders')">
+                📋 Commandes
+            </button>
+        </div>
+
+        <!-- Tab Produits -->
+        <div id="products" class="admin-tab active">
+            <h2>Gestion des produits</h2>
+            <table class="products-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prix</th>
+                        <th>Catégorie</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.id }}</td>
+                        <td>{{ product.image }} {{ product.name }}</td>
+                        <td>{{ product.price }} €</td>
+                        <td>{{ product.category }}</td>
+                        <td>{{ product.stock }}</td>
+                        <td>
+                            <button class="btn-small">Modifier</button>
+                            <button class="btn-small" style="background: #666;">Supprimer</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Tab Commandes -->
+        <div id="orders" class="admin-tab">
+            <h2>Historique des commandes</h2>
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Client</th>
+                        <th>Email</th>
+                        <th>Date</th>
+                        <th>Total</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>#{{ order.id }}</td>
+                        <td>{{ order.customer_name }}</td>
+                        <td>{{ order.email }}</td>
+                        <td>{{ order.date[:10] }}</td>
+                        <td>{{ "%.2f"|format(order.total) }} €</td>
+                        <td>{{ order.status }}</td>
+                        <td>
+                            <button class="btn-small">Voir</button>
+                            <button class="btn-small" style="background: #00a86b;">Valider</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Boulangerie Jules. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        function switchTab(tabName) {
+            // Masquer tous les tabs
+            const tabs = document.querySelectorAll('.admin-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Désactiver tous les boutons
+            const buttons = document.querySelectorAll('.admin-tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Afficher le tab sélectionné
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
