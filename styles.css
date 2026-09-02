@@ -1,11 +1,11 @@
 :root {
-  --ink: #f8f0df;
-  --muted: #9d1a40;
-  --accent: #a855f7;
-  --accent-strong: #e6b85c;
-  --paper: #250c1f;
-  --paper-soft: #630419;
-  --line: #6a3048;
+  --ink: #172033;
+  --muted: #687386;
+  --accent: #e86f51;
+  --accent-strong: #2a9d8f;
+  --paper: #f4efe7;
+  --paper-soft: #fffaf2;
+  --line: #d8cfc2;
   --measure: 76rem;
 }
 
@@ -19,10 +19,10 @@ body {
   margin: 0;
   padding: 0 2.5rem 2rem;
   background:
-    linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px),
-    radial-gradient(circle at 80% 8%, rgba(168, 85, 247, .2), transparent 25%),
-    radial-gradient(circle at 12% 72%, rgba(106, 48, 72, .28), transparent 28%),
+    linear-gradient(rgba(23, 32, 51, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23, 32, 51, .035) 1px, transparent 1px),
+    radial-gradient(circle at 80% 8%, rgba(232, 111, 81, .16), transparent 25%),
+    radial-gradient(circle at 12% 72%, rgba(42, 157, 143, .14), transparent 28%),
     var(--paper);
   background-size: 64px 64px, 64px 64px, auto, auto;
   color: var(--ink);
@@ -114,7 +114,7 @@ footer {
   margin-right: .5rem;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 .25rem rgba(168, 85, 247, .15);
+  box-shadow: 0 0 0 .25rem rgba(232, 111, 81, .15);
 }
 
 .hero-grid {
