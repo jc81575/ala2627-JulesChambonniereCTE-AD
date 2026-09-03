@@ -4,7 +4,7 @@
   --accent: #f5ca30;
   --accent-strong: #e7bd62;
   --paper: #050505;
-  --paper-soft: #744900;
+  --paper-soft: #efbf04;
   --line: #b17102;
   --measure: 76rem;
 }
@@ -22,7 +22,7 @@ body {
     linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px),
     radial-gradient(circle at 82% 4%, rgba(179, 0, 42, 0.4), transparent 32%),
-    linear-gradient(145deg, #050505 18%, #880012 58%, #080508 100%);
+    linear-gradient(145deg, #050505 18%, #a61024 58%, #080508 100%);
   background-size: 64px 64px, 64px 64px, auto, auto;
   color: var(--ink);
   font: 1rem/1.6 Georgia, "Times New Roman", serif;
