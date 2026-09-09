@@ -59,10 +59,12 @@ body {
   color: var(--accent);
 }
 
-.nav-links {
+.nav-links {.cards {
   display: flex;
-  align-items: center;
-  gap: 2rem;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+}
 }
 
 .nav-links a {
