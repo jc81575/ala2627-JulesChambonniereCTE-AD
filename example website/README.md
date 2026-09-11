@@ -1,6 +1,6 @@
-# European football motion lab
+# Champions League motion lab
 
-Open `index.html` in a browser. This is a CSS-only flexbox demo showing six European club-inspired motion studies:
+Open `index.html` in a browser. This is a flexbox and CSS motion demo with six Champions League-inspired club badge studies:
 
 - ambient float
 - perspective tilt
