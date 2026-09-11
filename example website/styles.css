@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 :root {
-  --ink: #15231f;
-  --muted: #63736d;
-  --paper: #f3f1e9;
-  --acid: #d8f36b;
-  --coral: #f4775e;
-  --cyan: #74d9d1;
-  --line: rgba(21, 35, 31, .16);
+  --ink: #f5f6f0;
+  --muted: #a6b4ab;
+  --paper: #0a1714;
+  --acid: #b8d632;
+  --coral: #f2c14e;
+  --cyan: #6bc6b0;
+  --line: rgba(226, 237, 215, .18);
   --ease: cubic-bezier(.2, .8, .2, 1);
 }
 
@@ -24,6 +24,7 @@ body {
   min-width: 320px;
   color: var(--ink);
   background: var(--paper);
+  background-image: radial-gradient(circle at 12% 15%, rgba(54, 115, 78, .42), transparent 28rem), linear-gradient(135deg, #0a1714 0%, #132b20 52%, #07100d 100%);
   font-family: 'Space Grotesk', sans-serif;
 }
 
@@ -32,10 +33,10 @@ body::before {
   inset: 0;
   z-index: -1;
   content: '';
-  opacity: .18;
+  opacity: .2;
   pointer-events: none;
-  background-image: linear-gradient(30deg, transparent 48%, rgba(21, 35, 31, .1) 49%, transparent 50%), linear-gradient(150deg, transparent 48%, rgba(21, 35, 31, .08) 49%, transparent 50%);
-  background-size: 72px 72px;
+  background-image: linear-gradient(90deg, transparent 49.5%, rgba(182, 214, 50, .18) 49.5%, rgba(182, 214, 50, .18) 50.5%, transparent 50.5%), linear-gradient(0deg, transparent 49.5%, rgba(182, 214, 50, .12) 49.5%, rgba(182, 214, 50, .12) 50.5%, transparent 50.5%);
+  background-size: 84px 84px;
 }
 
 .page-shell {
@@ -65,7 +66,7 @@ code,
 
 .kicker {
   margin: 0 0 18px;
-  color: #4c8a82;
+  color: var(--acid);
   font-size: .72rem;
   font-weight: 500;
 }
@@ -129,7 +130,9 @@ h1 em {
   justify-content: space-between;
   overflow: hidden;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, .34);
+  background: rgba(20, 44, 32, .7);
+  backdrop-filter: blur(8px);
+  transform-style: preserve-3d;
   transition: transform .55s var(--ease), box-shadow .55s var(--ease), border-color .55s ease;
 }
 
@@ -139,7 +142,7 @@ h1 em {
   z-index: -1;
   content: '';
   opacity: .22;
-  background: linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, .8) 50%, transparent 60%);
+  background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, .55) 50%, transparent 60%);
   transform: translateX(-120%);
   transition: transform .8s ease;
   pointer-events: none;
@@ -147,8 +150,9 @@ h1 em {
 
 .motion-card:hover {
   z-index: 2;
-  border-color: var(--ink);
-  box-shadow: 12px 18px 0 rgba(21, 35, 31, .1);
+  border-color: var(--acid);
+  box-shadow: 12px 18px 0 rgba(0, 0, 0, .25), 0 0 36px rgba(184, 214, 50, .12);
+  transform: translateY(-8px);
 }
 
 .motion-card:hover::after {
@@ -163,57 +167,114 @@ h1 em {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: var(--acid);
+  background: #1a4b35;
+  isolation: isolate;
+  transition: background .5s ease;
 }
 
 .card-art::before,
 .card-art::after {
   position: absolute;
   content: '';
-  clip-path: polygon(50% 0, 100% 28%, 82% 100%, 19% 86%, 0 30%);
+  border: 1px solid rgba(220, 240, 199, .22);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .card-art::before {
-  width: 190px;
-  height: 180px;
-  background: rgba(255, 255, 255, .3);
-  transform: rotate(19deg) translate(32px, -12px);
+  top: 50%;
+  left: 50%;
+  width: 230px;
+  height: 230px;
+  background: transparent;
 }
 
 .card-art::after {
-  width: 150px;
-  height: 150px;
-  background: rgba(21, 35, 31, .1);
-  transform: rotate(-28deg) translate(-40px, 30px);
+  top: 50%;
+  left: 50%;
+  width: 112px;
+  height: 112px;
+  background: rgba(7, 20, 13, .14);
 }
 
-.poly {
+.crest {
   position: absolute;
   z-index: 1;
-  display: block;
-  clip-path: polygon(50% 0, 100% 25%, 78% 100%, 13% 82%, 0 25%);
+  display: grid;
+  width: 116px;
+  height: 140px;
+  padding-top: 39px;
+  color: #fff;
+  border: 4px solid #f1d36b;
+  border-radius: 48% 48% 46% 46% / 35% 35% 65% 65%;
+  box-shadow: 0 14px 22px rgba(0, 0, 0, .25), inset 0 0 0 5px rgba(255, 255, 255, .16);
+  text-align: center;
+  transform: translateZ(28px) rotate(-4deg);
+  transition: transform .55s var(--ease), filter .55s ease;
 }
 
-.poly-a {
-  width: 115px;
-  height: 125px;
-  background: var(--coral);
-  transform: translate(-28px, 8px) rotate(17deg);
+.crest b {
+  align-self: end;
+  font-size: 1.55rem;
+  letter-spacing: .03em;
 }
 
-.poly-b {
-  width: 130px;
-  height: 92px;
-  background: var(--cyan);
-  transform: translate(37px, -19px) rotate(-16deg);
+.crest small {
+  align-self: start;
+  margin-top: 5px;
+  font-family: 'DM Mono', monospace;
+  font-size: .52rem;
+  letter-spacing: .12em;
 }
 
-.poly-c {
-  width: 82px;
-  height: 98px;
-  background: #f7d76b;
-  transform: translate(4px, 43px) rotate(31deg);
-  mix-blend-mode: multiply;
+.crest-psg {
+  background: linear-gradient(#081b49 0 42%, #d51f3d 43% 57%, #081b49 58%);
+}
+
+.crest-madrid {
+  color: #183c8f;
+  background: #f3f3ed;
+  border-color: #d6b354;
+}
+
+.crest-bayern {
+  background: repeating-linear-gradient(135deg, #cf1c3d 0 10px, #f3f0e5 10px 20px);
+}
+
+.crest-barca {
+  background: linear-gradient(90deg, #172d78 0 34%, #bd1d3b 35% 66%, #f0b52b 67%);
+}
+
+.crest-liverpool {
+  background: #c32635;
+  border-color: #d6e8c5;
+}
+
+.crest-milan {
+  background: repeating-linear-gradient(90deg, #111 0 17px, #c52535 17px 34px);
+}
+
+.card-float .crest {
+  animation: crest-float 5s ease-in-out infinite;
+}
+
+.pitch-mark {
+  position: absolute;
+  width: 260px;
+  height: 84px;
+  border: 1px solid rgba(237, 247, 218, .22);
+  border-radius: 50%;
+  transform: rotate(-16deg);
+}
+
+.pitch-mark::after {
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  width: 1px;
+  height: 84px;
+  content: '';
+  background: rgba(237, 247, 218, .22);
 }
 
 .card-copy {
@@ -251,45 +312,18 @@ code {
   text-overflow: ellipsis;
 }
 
-.card-float .card-art .poly {
-  animation: poly-float 5s ease-in-out infinite;
-}
-
-.card-float .poly-b {
-  animation-delay: -.8s;
-}
-
-.card-float .poly-c {
-  animation-delay: -1.6s;
-}
-
 .card-tilt:hover {
   transform: perspective(700px) rotateX(5deg) rotateY(-8deg) translateY(-8px);
   transform-origin: center bottom;
 }
 
-.card-tilt:hover .poly-a {
-  transform: translate(-35px, 0) rotate(9deg) scale(1.08);
-}
-
-.card-tilt:hover .poly-b {
-  transform: translate(48px, -27px) rotate(-23deg) scale(.92);
+.motion-card:hover .crest {
+  filter: saturate(1.2) brightness(1.08);
+  transform: translateZ(58px) rotate(3deg) scale(1.05);
 }
 
 .card-shimmer:hover .card-art::before {
   animation: shimmer 1.1s ease forwards;
-}
-
-.card-shimmer:hover .poly {
-  animation: snap-in .7s var(--ease) both;
-}
-
-.card-shimmer:hover .poly-b {
-  animation-delay: .08s;
-}
-
-.card-shimmer:hover .poly-c {
-  animation-delay: .16s;
 }
 
 .card-orbit .card-art {
@@ -319,8 +353,8 @@ code {
   transform: rotateY(-4deg);
 }
 
-.card-flip:hover .poly-a {
-  animation: flip-plane .8s var(--ease) both;
+.card-flip:hover .crest {
+  animation: flip-crest .8s var(--ease) both;
 }
 
 .card-pulse:hover {
@@ -356,15 +390,15 @@ code {
   background: var(--line);
 }
 
-@keyframes poly-float {
+@keyframes crest-float {
 
   0%,
   100% {
-    transform: translate(-28px, 8px) rotate(17deg);
+    transform: translateZ(28px) rotate(-4deg);
   }
 
   50% {
-    transform: translate(-28px, -8px) rotate(22deg);
+    transform: translateZ(42px) rotate(3deg);
   }
 }
 
@@ -378,17 +412,6 @@ code {
   }
 }
 
-@keyframes snap-in {
-  0% {
-    opacity: .4;
-    transform: scale(.8) rotate(-10deg);
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
 @keyframes orbit {
   from {
     transform: rotate(0deg) translateX(92px) rotate(0deg);
@@ -399,9 +422,9 @@ code {
   }
 }
 
-@keyframes flip-plane {
+@keyframes flip-crest {
   50% {
-    transform: translate(-28px, 8px) rotateY(70deg) scaleX(.3);
+    transform: translateZ(50px) rotateY(70deg) scaleX(.3);
   }
 }
 

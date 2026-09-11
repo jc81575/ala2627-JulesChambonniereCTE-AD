@@ -1,6 +1,6 @@
-# Low-poly card motion lab
+# European football motion lab
 
-Open `index.html` in a browser. This is a CSS-only flexbox demo showing six card motion studies:
+Open `index.html` in a browser. This is a CSS-only flexbox demo showing six European club-inspired motion studies:
 
 - ambient float
 - perspective tilt

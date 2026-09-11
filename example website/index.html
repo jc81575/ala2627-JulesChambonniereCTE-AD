@@ -4,20 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A flexbox card animation playground made with CSS only.">
-  <title>Low-poly card motion lab</title>
+  <meta name="description" content="A European football card animation playground made with CSS only.">
+  <title>European football motion lab</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
   <main class="page-shell">
     <header class="intro">
-      <p class="kicker">Flexbox / CSS only</p>
-      <h1>Low-poly card<br><em>motion lab</em></h1>
-      <p class="intro-copy">A small playground of modern card animations. Every tile is arranged with flexbox and
-        animated with CSS.</p>
+      <p class="kicker">UEFA / CSS only</p>
+      <h1>European football<br><em>motion lab</em></h1>
+      <p class="intro-copy">Six club-inspired animation studies. Every crest, pitch line and interaction is built with
+        flexbox and CSS.</p>
       <div class="intro-meta" aria-label="Demo features">
-        <span>06 motion studies</span>
+        <span>06 club crests</span>
         <span>01 stylesheet</span>
         <span>0 scripts</span>
       </div>
@@ -25,62 +25,63 @@
 
     <section class="card-grid" aria-label="CSS card animation examples">
       <article class="motion-card card-float">
-        <div class="card-art" aria-hidden="true"><span class="poly poly-a"></span><span class="poly poly-b"></span><span
-            class="poly poly-c"></span></div>
+        <div class="card-art psg-art" aria-label="Paris Saint-Germain crest"><span class="pitch-mark"></span><span
+            class="crest crest-psg"><b>PSG</b><small>PARIS</small></span></div>
         <div class="card-copy"><span class="index">01 / ambient</span>
-          <h2>Float</h2>
-          <p>A gentle translate loop gives the card a weightless rhythm.</p>
+          <h2>Paris / Float</h2>
+          <p>A gentle translate loop gives the Paris crest a weightless rhythm.</p>
           <code>animation: float 5s ease-in-out infinite</code>
         </div>
       </article>
 
       <article class="motion-card card-tilt">
-        <div class="card-art" aria-hidden="true"><span class="poly poly-a"></span><span class="poly poly-b"></span><span
-            class="poly poly-c"></span></div>
+        <div class="card-art madrid-art" aria-label="Real Madrid crest"><span class="pitch-mark"></span><span
+            class="crest crest-madrid"><b>RM</b><small>MADRID</small></span></div>
         <div class="card-copy"><span class="index">02 / depth</span>
-          <h2>Perspective</h2>
-          <p>Hover to tilt the surface and shift the polygonal planes.</p><code>transform: perspective(700px)</code>
+          <h2>Madrid / Tilt</h2>
+          <p>Hover to tilt the card and shift the crest through its depth.</p><code>transform: perspective(700px)</code>
         </div>
       </article>
 
       <article class="motion-card card-shimmer">
-        <div class="card-art" aria-hidden="true"><span class="poly poly-a"></span><span class="poly poly-b"></span><span
-            class="poly poly-c"></span></div>
+        <div class="card-art bayern-art" aria-label="Bayern Munich crest"><span class="pitch-mark"></span><span
+            class="crest crest-bayern"><b>FCB</b><small>MUNCHEN</small></span></div>
         <div class="card-copy"><span class="index">03 / light</span>
-          <h2>Shimmer</h2>
-          <p>A clipped highlight sweeps across the card on hover.</p><code>background: linear-gradient(...)</code>
+          <h2>Bayern / Shimmer</h2>
+          <p>A stadium-light highlight sweeps across the crest on hover.</p>
+          <code>background: linear-gradient(...)</code>
         </div>
       </article>
 
       <article class="motion-card card-orbit">
-        <div class="card-art" aria-hidden="true"><span class="poly poly-a"></span><span class="poly poly-b"></span><span
-            class="poly poly-c"></span><span class="orbit-dot"></span></div>
+        <div class="card-art barca-art" aria-label="Barcelona crest"><span class="pitch-mark"></span><span
+            class="crest crest-barca"><b>FCB</b><small>BARCA</small></span><span class="orbit-dot"></span></div>
         <div class="card-copy"><span class="index">04 / orbit</span>
-          <h2>Orbit</h2>
-          <p>One small point circles the card while the planes breathe.</p><code>offset-path: path(...)</code>
+          <h2>Barca / Orbit</h2>
+          <p>One match point circles the crest while the pitch lines breathe.</p><code>offset-path: path(...)</code>
         </div>
       </article>
 
       <article class="motion-card card-flip">
-        <div class="card-art" aria-hidden="true"><span class="poly poly-a"></span><span class="poly poly-b"></span><span
-            class="poly poly-c"></span></div>
+        <div class="card-art liverpool-art" aria-label="Liverpool crest"><span class="pitch-mark"></span><span
+            class="crest crest-liverpool"><b>LFC</b><small>LIVERPOOL</small></span></div>
         <div class="card-copy"><span class="index">05 / reveal</span>
-          <h2>Flip</h2>
-          <p>Hover to rotate the frame around its vertical axis.</p><code>transform: rotateY(8deg)</code>
+          <h2>Red / Flip</h2>
+          <p>Hover to rotate the Liverpool crest around its vertical axis.</p><code>transform: rotateY(8deg)</code>
         </div>
       </article>
 
       <article class="motion-card card-pulse">
-        <div class="card-art" aria-hidden="true"><span class="poly poly-a"></span><span class="poly poly-b"></span><span
-            class="poly poly-c"></span></div>
+        <div class="card-art milan-art" aria-label="AC Milan crest"><span class="pitch-mark"></span><span
+            class="crest crest-milan"><b>ACM</b><small>MILANO</small></span></div>
         <div class="card-copy"><span class="index">06 / signal</span>
-          <h2>Pulse</h2>
-          <p>A soft border pulse makes the interactive edge feel alive.</p><code>box-shadow: 0 0 0 1px</code>
+          <h2>Milan / Pulse</h2>
+          <p>A soft touchline pulse makes the interactive edge feel alive.</p><code>box-shadow: 0 0 0 1px</code>
         </div>
       </article>
     </section>
 
-    <footer class="footer-note"><span class="status-dot"></span> Hover any card to inspect its motion <span
+    <footer class="footer-note"><span class="status-dot"></span> Hover any crest to inspect its motion <span
         class="footer-line"></span> prefers-reduced-motion supported</footer>
   </main>
 </body>
