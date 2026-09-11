@@ -127,6 +127,7 @@ h1 em {
   display: flex;
   flex: 1 1 330px;
   min-height: 390px;
+  color: inherit;
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
@@ -135,6 +136,13 @@ h1 em {
   backdrop-filter: blur(8px);
   transform-style: preserve-3d;
   transition: transform .55s var(--ease), box-shadow .55s var(--ease), border-color .55s ease;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.motion-card:focus-visible {
+  outline: 3px solid var(--coral);
+  outline-offset: 5px;
 }
 
 .motion-card::after {
@@ -200,6 +208,8 @@ h1 em {
 
 .crest {
   position: absolute;
+  top: 50%;
+  left: 50%;
   z-index: 1;
   display: grid;
   width: 148px;
@@ -209,7 +219,7 @@ h1 em {
   background: rgba(255, 255, 255, .08);
   box-shadow: 0 14px 22px rgba(0, 0, 0, .3), 0 0 28px rgba(103, 215, 255, .16), inset 0 0 0 8px rgba(255, 255, 255, .07);
   text-align: center;
-  transform: translateZ(28px) rotate(-4deg);
+  transform: translate(-50%, -50%) translateZ(28px) rotate(-4deg);
   transition: transform .55s var(--ease), filter .55s ease;
 }
 
@@ -285,7 +295,7 @@ code {
 
 .motion-card:hover .crest {
   filter: saturate(1.2) brightness(1.08);
-  transform: translateZ(58px) rotate(3deg) scale(1.05);
+  transform: translate(-50%, -50%) translateZ(58px) rotate(3deg) scale(1.05);
 }
 
 .card-shimmer:hover .card-art::before {
@@ -360,11 +370,11 @@ code {
 
   0%,
   100% {
-    transform: translateZ(28px) rotate(-4deg);
+    transform: translate(-50%, -50%) translateZ(28px) rotate(-4deg);
   }
 
   50% {
-    transform: translateZ(42px) rotate(3deg);
+    transform: translate(-50%, -50%) translateZ(42px) rotate(3deg);
   }
 }
 
@@ -390,7 +400,7 @@ code {
 
 @keyframes flip-crest {
   50% {
-    transform: translateZ(50px) rotateY(70deg) scaleX(.3);
+    transform: translate(-50%, -50%) translateZ(50px) rotateY(70deg) scaleX(.3);
   }
 }
 
