@@ -128,4 +128,4 @@ function changeDirection(event) {
 document.addEventListener('keydown', changeDirection);
 
 randomFood();
-setInterval(gameLoop, 120);
+setInterval(gameLoop, 180);
