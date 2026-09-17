@@ -172,20 +172,83 @@ function drawFood(timestamp) {
 }
 
 function drawSnake(progress) {
+  const points = snake.map((segment, index) => {
+    const previous = previousSnake[index] || segment;
+    return {
+      x: (previous.x + (segment.x - previous.x) * progress) * gridSize + gridSize / 2,
+      y: (previous.y + (segment.y - previous.y) * progress) * gridSize + gridSize / 2
+    };
+  });
+
+  ctx.save();
+  ctx.lineCap = 'round';
+  ctx.lineJoin = 'round';
+  ctx.lineWidth = 15;
+  ctx.strokeStyle = '#126b76';
+  ctx.shadowColor = '#4de9ff';
+  ctx.shadowBlur = 10;
+  ctx.beginPath();
+  points.forEach((point, index) => {
+    if (index === 0) ctx.moveTo(point.x, point.y);
+    else ctx.lineTo(point.x, point.y);
+  });
+  ctx.stroke();
+  ctx.restore();
+
   snake.forEach((segment, index) => {
     const previous = previousSnake[index] || segment;
-  const x = (previous.x + (segment.x - previous.x) * progress) * gridSize + 2;
-  const y = (previous.y + (segment.y - previous.y) * progress) * gridSize + 2;
-  const size = gridSize - 4;
-  ctx.save();
-  ctx.shadowColor = index === 0 ? '#b8ff57' : '#4de9ff';
-  ctx.shadowBlur = index === 0 ? 16 : 8;
-  ctx.fillStyle = index === 0 ? '#b8ff57' : `hsl(${185 + index * 3}, 90%, ${58 - Math.min(index, 8) * 2}%)`;
-  ctx.beginPath();
-  ctx.roundRect(x, y, size, size, index === 0 ? 7 : 5);
-  ctx.fill();
+    const x = (previous.x + (segment.x - previous.x) * progress) * gridSize + gridSize / 2;
+    const y = (previous.y + (segment.y - previous.y) * progress) * gridSize + gridSize / 2;
+    const radius = index === 0 ? 10 : Math.max(6, 9 - index * .08);
+    ctx.save();
+    ctx.shadowColor = index === 0 ? '#b8ff57' : '#4de9ff';
+    ctx.shadowBlur = index === 0 ? 18 : 9;
+    ctx.fillStyle = index === 0 ? '#b8ff57' : `hsl(${185 + index * 3}, 90%, ${58 - Math.min(index, 8) * 2}%)`;
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.fill();
     ctx.restore();
   });
+
+  const head = points[0];
+  const side = { x: -direction.y, y: direction.x };
+  const eyeDistance = 5;
+  const eyeForward = 3;
+  const eyes = [
+    { x: head.x + direction.x * eyeForward + side.x * eyeDistance, y: head.y + direction.y * eyeForward + side.y * eyeDistance },
+    { x: head.x + direction.x * eyeForward - side.x * eyeDistance, y: head.y + direction.y * eyeForward - side.y * eyeDistance }
+  ];
+
+  ctx.save();
+  eyes.forEach(eye => {
+    ctx.fillStyle = '#07111c';
+    ctx.beginPath();
+    ctx.arc(eye.x, eye.y, 3.2, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath();
+    ctx.arc(eye.x + direction.x, eye.y + direction.y, 1.1, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  const tongueStart = {
+    x: head.x + direction.x * 9,
+    y: head.y + direction.y * 9
+  };
+  const tongueEnd = {
+    x: head.x + direction.x * 15,
+    y: head.y + direction.y * 15
+  };
+  ctx.strokeStyle = '#ff5ca8';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(tongueStart.x, tongueStart.y);
+  ctx.lineTo(tongueEnd.x, tongueEnd.y);
+  ctx.lineTo(tongueEnd.x + side.x * 3, tongueEnd.y + side.y * 3);
+  ctx.moveTo(tongueEnd.x, tongueEnd.y);
+  ctx.lineTo(tongueEnd.x - side.x * 3, tongueEnd.y - side.y * 3);
+  ctx.stroke();
+  ctx.restore();
 }
 
 function drawParticles() {
