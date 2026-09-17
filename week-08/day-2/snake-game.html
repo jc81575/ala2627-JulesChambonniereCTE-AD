@@ -1,27 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Snake Game</title>
+  <title>Neon Snake</title>
   <link rel="stylesheet" href="snake-game.css" />
 </head>
 
 <body>
-  <div class="game-wrap">
-    <h1>Snake Game</h1>
-    <div class="scoreboard">
-      <span>Score:</span>
-      <span id="score">0</span>
-      <span>Best score:</span>
-      <span id="best-score">0</span>
-    </div>
-    <canvas id="game" width="400" height="400"></canvas>
-    <p>Use the arrow keys to move.</p>
-  </div>
+  <main class="game-wrap">
+    <header class="game-header">
+      <div>
+        <p class="eyebrow">ARCADE // 001</p>
+        <h1>NEON <span>SNAKE</span></h1>
+      </div>
+      <button class="icon-button" id="pause-button" type="button" aria-label="Mettre en pause"
+        title="Pause (Espace)">Ⅱ</button>
+    </header>
 
-  <script src="snake-game.js"></script>
+    <section class="game-card" aria-label="Jeu Snake">
+      <div class="scoreboard">
+        <div class="stat"><span>Score</span><strong id="score">0</strong></div>
+        <div class="stat best"><span>Record</span><strong id="best-score">0</strong></div>
+        <div class="stat"><span>Vitesse</span><strong id="speed">1x</strong></div>
+      </div>
+      <div class="canvas-wrap">
+        <canvas id="game" width="400" height="400"></canvas>
+        <div class="game-overlay" id="game-overlay">
+          <p class="overlay-kicker">PRÊT À JOUER ?</p>
+          <h2 id="overlay-title">Mange les pixels.</h2>
+          <p id="overlay-text">Utilise les flèches ou WASD pour te déplacer.</p>
+          <button class="primary-button" id="start-button" type="button">Lancer la partie</button>
+        </div>
+      </div>
+      <div class="game-footer">
+        <span><kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd> ou <kbd>WASD</kbd></span>
+        <span class="status"><i></i><span id="status-text">En attente</span></span>
+      </div>
+    </section>
+
+    <p class="mobile-hint">Glisse sur la zone de jeu pour diriger</p>
+    </div>
+
+    <script src="snake-game.js"></script>
 </body>
 
 </html>
