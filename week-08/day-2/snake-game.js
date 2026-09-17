@@ -1,6 +1,7 @@
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 const scoreEl = document.getElementById('score');
+const bestScoreEl = document.getElementById('best-score');
 
 const gridSize = 20;
 const tileCount = canvas.width / gridSize;
@@ -15,6 +16,9 @@ let direction = { x: 1, y: 0 };
 let nextDirection = { x: 1, y: 0 };
 let food = { x: 15, y: 10 };
 let score = 0;
+let bestScore = Number(localStorage.getItem('snakeBestScore')) || 0;
+
+bestScoreEl.textContent = bestScore;
 
 function randomFood() {
   food = {
@@ -64,6 +68,13 @@ function update() {
   if (head.x === food.x && head.y === food.y) {
     score += 1;
     scoreEl.textContent = score;
+
+    if (score > bestScore) {
+      bestScore = score;
+      bestScoreEl.textContent = bestScore;
+      localStorage.setItem('snakeBestScore', bestScore);
+    }
+
     randomFood();
   } else {
     snake.pop();
