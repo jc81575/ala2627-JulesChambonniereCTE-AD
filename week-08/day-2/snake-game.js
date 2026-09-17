@@ -17,6 +17,8 @@ let nextDirection = { x: 1, y: 0 };
 let food = { x: 15, y: 10 };
 let score = 0;
 let bestScore = Number(localStorage.getItem('snakeBestScore')) || 0;
+let previousSnake = snake.map(segment => ({ ...segment }));
+let lastUpdateTime = performance.now();
 
 bestScoreEl.textContent = bestScore;
 
@@ -35,6 +37,7 @@ function randomFood() {
 }
 
 function update() {
+  previousSnake = snake.map(segment => ({ ...segment }));
   direction = nextDirection;
 
   const head = {
@@ -55,11 +58,13 @@ function update() {
       { x: 9, y: 10 },
       { x: 8, y: 10 }
     ];
+    previousSnake = snake.map(segment => ({ ...segment }));
     direction = { x: 1, y: 0 };
     nextDirection = { x: 1, y: 0 };
     score = 0;
     scoreEl.textContent = score;
     randomFood();
+    lastUpdateTime = performance.now();
     return;
   }
 
@@ -93,16 +98,29 @@ function drawBoard() {
   }
 }
 
-function drawSnake() {
+function drawSnake(progress) {
   snake.forEach((segment, index) => {
+    const previousSegment = previousSnake[index] || segment;
+    const x = previousSegment.x + (segment.x - previousSegment.x) * progress;
+    const y = previousSegment.y + (segment.y - previousSegment.y) * progress;
+
     ctx.fillStyle = index === 0 ? '#22c55e' : '#16a34a';
     ctx.fillRect(
-      segment.x * gridSize + 1,
-      segment.y * gridSize + 1,
+      x * gridSize + 1,
+      y * gridSize + 1,
       gridSize - 2,
       gridSize - 2
     );
   });
+}
+
+function drawFrame(timestamp) {
+  const progress = Math.min((timestamp - lastUpdateTime) / 180, 1);
+
+  drawBoard();
+  drawFood();
+  drawSnake(progress);
+  requestAnimationFrame(drawFrame);
 }
 
 function drawFood() {
@@ -113,13 +131,6 @@ function drawFood() {
     gridSize - 4,
     gridSize - 4
   );
-}
-
-function gameLoop() {
-  update();
-  drawBoard();
-  drawFood();
-  drawSnake();
 }
 
 function changeDirection(event) {
@@ -139,4 +150,8 @@ function changeDirection(event) {
 document.addEventListener('keydown', changeDirection);
 
 randomFood();
-setInterval(gameLoop, 180);
+setInterval(() => {
+  update();
+  lastUpdateTime = performance.now();
+}, 180);
+requestAnimationFrame(drawFrame);
