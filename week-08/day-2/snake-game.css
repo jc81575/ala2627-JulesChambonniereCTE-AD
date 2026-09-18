@@ -132,6 +132,33 @@ h1 span {
   color: var(--lime);
 }
 
+.speed-controls {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 12px;
+}
+
+.speed-button {
+  flex: 1;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .03);
+  color: var(--text);
+  font: 800 .72rem/1 monospace;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.speed-button:hover,
+.speed-button.active {
+  border-color: rgba(255, 120, 120, .8);
+  background: linear-gradient(135deg, rgba(255, 90, 90, .18), rgba(120, 10, 10, .45));
+  box-shadow: 0 0 18px rgba(255, 96, 96, .18);
+}
+
 .canvas-wrap {
   position: relative;
   overflow: hidden;

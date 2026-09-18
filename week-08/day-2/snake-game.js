@@ -10,6 +10,7 @@ const startButton = document.getElementById('start-button');
 const pauseButton = document.getElementById('pause-button');
 const statusText = document.getElementById('status-text');
 const status = document.querySelector('.status');
+const speedButtons = document.querySelectorAll('.speed-button');
 
 const gridSize = 20;
 const tileCount = canvas.width / gridSize;
@@ -23,6 +24,7 @@ let nextDirection;
 let food;
 let score;
 let bestScore = Number(localStorage.getItem(storageKey)) || 0;
+let speedMultiplier = 1;
 let gameState = 'ready';
 let lastStep = performance.now();
 let particles = [];
@@ -49,13 +51,18 @@ function randomFood() {
 }
 
 function stepDuration() {
-  return Math.max(78, 170 - score * 4);
+  const baseDuration = Math.max(78, 170 - score * 4);
+  return Math.max(35, baseDuration / speedMultiplier);
+}
+
+function formatSpeed(value) {
+  return Number.isInteger(value) ? `${value}x` : `${value.toFixed(1)}x`;
 }
 
 function updateHud() {
   scoreEl.textContent = score;
   bestScoreEl.textContent = bestScore;
-  speedEl.textContent = `${(170 / stepDuration()).toFixed(1)}x`;
+  speedEl.textContent = formatSpeed(speedMultiplier);
 }
 
 function setOverlay(title, text, buttonText, visible) {
@@ -310,6 +317,15 @@ function drawFrame(timestamp) {
   requestAnimationFrame(drawFrame);
 }
 
+function setSpeedMultiplier(multiplicator) {
+  speedMultiplier = multiplicator;
+  speedButtons.forEach(button => {
+    const isActive = Number(button.dataset.speed) === multiplicator;
+    button.classList.toggle('active', isActive);
+  });
+  updateHud();
+}
+
 function changeDirection(newDirection) {
   if (newDirection.x === -direction.x && newDirection.y === -direction.y) return;
   nextDirection = newDirection;
@@ -349,6 +365,9 @@ function togglePause() {
 
 startButton.addEventListener('click', togglePause);
 pauseButton.addEventListener('click', togglePause);
+speedButtons.forEach(button => {
+  button.addEventListener('click', () => setSpeedMultiplier(Number(button.dataset.speed)));
+});
 document.addEventListener('keydown', handleKeydown);
 canvas.addEventListener('touchstart', event => {
   const touch = event.changedTouches[0];
@@ -369,6 +388,7 @@ canvas.addEventListener('touchend', event => {
 resetSnake();
 randomFood();
 score = 0;
+setSpeedMultiplier(1);
 updateHud();
 setState('ready');
 requestAnimationFrame(drawFrame);
