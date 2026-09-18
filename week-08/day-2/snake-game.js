@@ -183,10 +183,10 @@ function drawSnake(progress) {
   ctx.save();
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
-  ctx.lineWidth = 15;
-  ctx.strokeStyle = '#7a5efc';
-  ctx.shadowColor = '#8d7bff';
-  ctx.shadowBlur = 14;
+  ctx.lineWidth = 16;
+  ctx.strokeStyle = '#3ad98f';
+  ctx.shadowColor = '#9bffd0';
+  ctx.shadowBlur = 16;
   ctx.beginPath();
   points.forEach((point, index) => {
     if (index === 0) ctx.moveTo(point.x, point.y);
@@ -199,13 +199,12 @@ function drawSnake(progress) {
     const previous = previousSnake[index] || segment;
     const x = (previous.x + (segment.x - previous.x) * progress) * gridSize + gridSize / 2;
     const y = (previous.y + (segment.y - previous.y) * progress) * gridSize + gridSize / 2;
-    const radius = index === 0 ? 11 : Math.max(5.5, 9 - index * .1);
-    const hue = index === 0 ? 320 : 240 + index * 5;
-    const lightness = index === 0 ? 67 : 62 - Math.min(index, 10) * 1.6;
+    const radius = index === 0 ? 11.5 : Math.max(5, 9 - index * .08);
+    const fill = index === 0 ? '#9fffd0' : `hsl(${145 - index * 2}, 72%, ${58 - Math.min(index, 10) * 1.5}%)`;
     ctx.save();
-    ctx.shadowColor = index === 0 ? '#ff8de8' : '#7fe8ff';
+    ctx.shadowColor = index === 0 ? '#d8ffe9' : '#7af9bc';
     ctx.shadowBlur = index === 0 ? 18 : 10;
-    ctx.fillStyle = `hsl(${hue}, 92%, ${lightness}%)`;
+    ctx.fillStyle = fill;
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, Math.PI * 2);
     ctx.fill();
@@ -220,36 +219,27 @@ function drawSnake(progress) {
   ctx.save();
   ctx.translate(head.x, head.y);
   ctx.rotate(angle);
-  ctx.shadowColor = '#ff9fe8';
+  ctx.shadowColor = '#b7ffe0';
   ctx.shadowBlur = 20;
-  ctx.fillStyle = '#ff7be3';
+  ctx.fillStyle = '#99ffd6';
   ctx.beginPath();
   ctx.moveTo(11, 0);
-  ctx.lineTo(-4, 8.5);
-  ctx.lineTo(-8, 0);
-  ctx.lineTo(-4, -8.5);
+  ctx.lineTo(3, 8);
+  ctx.lineTo(-5, 7);
+  ctx.lineTo(-10, 0);
+  ctx.lineTo(-5, -7);
+  ctx.lineTo(3, -8);
   ctx.closePath();
   ctx.fill();
 
   ctx.shadowBlur = 0;
-  ctx.fillStyle = '#061326';
-  ctx.beginPath();
-  ctx.arc(2.5, -3.2, 2.2, 0, Math.PI * 2);
-  ctx.arc(2.5, 3.2, 2.2, 0, Math.PI * 2);
-  ctx.fill();
+  ctx.fillStyle = '#041b12';
+  ctx.fillRect(-1.5, -5, 8, 3.2);
+  ctx.fillRect(-1.5, 1.8, 8, 3.2);
 
-  ctx.fillStyle = '#ffffff';
-  ctx.beginPath();
-  ctx.arc(3.7, -3.2, 0.9, 0, Math.PI * 2);
-  ctx.arc(3.7, 3.2, 0.9, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.strokeStyle = '#ffb9f0';
-  ctx.lineWidth = 1.6;
-  ctx.beginPath();
-  ctx.moveTo(-6, 0);
-  ctx.lineTo(-12, 0);
-  ctx.stroke();
+  ctx.fillStyle = '#ebfff8';
+  ctx.fillRect(2.2, -4.2, 2.6, 1.5);
+  ctx.fillRect(2.2, 2.7, 2.6, 1.5);
   ctx.restore();
 }
 
