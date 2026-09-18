@@ -1,12 +1,14 @@
 :root {
-  --ink: #080b18;
-  --panel: #10162a;
-  --line: rgba(145, 164, 205, 0.18);
-  --text: #edf5ff;
-  --muted: #8290b3;
-  --cyan: #4de9ff;
-  --lime: #b8ff57;
-  --pink: #ff5ca8;
+  --ink: #06130d;
+  --panel: #0d1f18;
+  --line: rgba(120, 255, 180, 0.22);
+  --text: #edf9f1;
+  --muted: #b5d4c0;
+  --cyan: #78ffd0;
+  --violet: #7ef7c8;
+  --purple: #3edb92;
+  --pink: #7fffd4;
+  --lime: #b8ffd6;
 }
 
 * {
@@ -21,7 +23,7 @@ body {
   padding: 28px 16px;
   overflow-x: hidden;
   color: var(--text);
-  background: radial-gradient(circle at 50% -15%, #24325d 0, var(--ink) 48rem), var(--ink);
+  background: radial-gradient(circle at 50% -15%, #1a4531 0, #071a13 38rem, var(--ink) 80%), var(--ink);
   font-family: "Trebuchet MS", sans-serif;
 }
 
@@ -31,8 +33,8 @@ body::before {
   z-index: -1;
   pointer-events: none;
   content: "";
-  opacity: .22;
-  background-image: linear-gradient(rgba(77, 233, 255, .08) 1px, transparent 1px), linear-gradient(90deg, rgba(77, 233, 255, .08) 1px, transparent 1px);
+  opacity: .24;
+  background-image: linear-gradient(rgba(120, 255, 208, .10) 1px, transparent 1px), linear-gradient(90deg, rgba(120, 255, 208, .10) 1px, transparent 1px);
   background-size: 44px 44px;
   mask-image: linear-gradient(to bottom, black, transparent 80%);
 }
@@ -84,17 +86,17 @@ h1 span {
 
 .icon-button:hover {
   color: var(--ink);
-  border-color: var(--cyan);
-  background: var(--cyan);
-  box-shadow: 0 0 22px rgba(77, 233, 255, .35);
+  border-color: var(--purple);
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  box-shadow: 0 0 22px rgba(139, 109, 255, .4);
 }
 
 .game-card {
   padding: 12px;
-  border: 1px solid rgba(77, 233, 255, .28);
+  border: 1px solid rgba(120, 255, 208, .32);
   border-radius: 22px;
-  background: rgba(16, 22, 42, .82);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, .4), 0 0 45px rgba(77, 233, 255, .07);
+  background: rgba(9, 23, 17, .82);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .4), 0 0 45px rgba(90, 255, 180, .09);
   backdrop-filter: blur(14px);
 }
 
@@ -133,9 +135,9 @@ h1 span {
 .canvas-wrap {
   position: relative;
   overflow: hidden;
-  border: 2px solid rgba(77, 233, 255, .55);
+  border: 2px solid rgba(120, 255, 208, .6);
   border-radius: 14px;
-  box-shadow: 0 0 0 1px rgba(184, 255, 87, .08), 0 0 35px rgba(77, 233, 255, .18);
+  box-shadow: 0 0 0 1px rgba(120, 255, 208, .10), 0 0 35px rgba(120, 255, 208, .18);
 }
 
 canvas {
@@ -186,19 +188,19 @@ canvas {
 
 .primary-button {
   padding: 12px 19px;
-  border-color: var(--lime);
+  border-color: var(--purple);
   border-radius: 10px;
   color: var(--ink);
-  background: var(--lime);
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
   font: 900 .78rem monospace;
   letter-spacing: .05em;
   text-transform: uppercase;
-  box-shadow: 0 0 20px rgba(184, 255, 87, .24);
+  box-shadow: 0 0 20px rgba(139, 109, 255, .24);
 }
 
 .primary-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 7px 25px rgba(184, 255, 87, .35);
+  box-shadow: 0 7px 25px rgba(111, 201, 255, .35);
 }
 
 .game-footer {

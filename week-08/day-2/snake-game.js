@@ -184,9 +184,9 @@ function drawSnake(progress) {
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
   ctx.lineWidth = 15;
-  ctx.strokeStyle = '#126b76';
-  ctx.shadowColor = '#4de9ff';
-  ctx.shadowBlur = 10;
+  ctx.strokeStyle = '#7a5efc';
+  ctx.shadowColor = '#8d7bff';
+  ctx.shadowBlur = 14;
   ctx.beginPath();
   points.forEach((point, index) => {
     if (index === 0) ctx.moveTo(point.x, point.y);
@@ -199,11 +199,13 @@ function drawSnake(progress) {
     const previous = previousSnake[index] || segment;
     const x = (previous.x + (segment.x - previous.x) * progress) * gridSize + gridSize / 2;
     const y = (previous.y + (segment.y - previous.y) * progress) * gridSize + gridSize / 2;
-    const radius = index === 0 ? 10 : Math.max(6, 9 - index * .08);
+    const radius = index === 0 ? 11 : Math.max(5.5, 9 - index * .1);
+    const hue = index === 0 ? 320 : 240 + index * 5;
+    const lightness = index === 0 ? 67 : 62 - Math.min(index, 10) * 1.6;
     ctx.save();
-    ctx.shadowColor = index === 0 ? '#b8ff57' : '#4de9ff';
-    ctx.shadowBlur = index === 0 ? 18 : 9;
-    ctx.fillStyle = index === 0 ? '#b8ff57' : `hsl(${185 + index * 3}, 90%, ${58 - Math.min(index, 8) * 2}%)`;
+    ctx.shadowColor = index === 0 ? '#ff8de8' : '#7fe8ff';
+    ctx.shadowBlur = index === 0 ? 18 : 10;
+    ctx.fillStyle = `hsl(${hue}, 92%, ${lightness}%)`;
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, Math.PI * 2);
     ctx.fill();
@@ -211,42 +213,42 @@ function drawSnake(progress) {
   });
 
   const head = points[0];
-  const side = { x: -direction.y, y: direction.x };
-  const eyeDistance = 5;
-  const eyeForward = 3;
-  const eyes = [
-    { x: head.x + direction.x * eyeForward + side.x * eyeDistance, y: head.y + direction.y * eyeForward + side.y * eyeDistance },
-    { x: head.x + direction.x * eyeForward - side.x * eyeDistance, y: head.y + direction.y * eyeForward - side.y * eyeDistance }
-  ];
+  const dirX = direction.x || 0;
+  const dirY = direction.y || 0;
+  const angle = Math.atan2(dirY, dirX);
 
   ctx.save();
-  eyes.forEach(eye => {
-    ctx.fillStyle = '#07111c';
-    ctx.beginPath();
-    ctx.arc(eye.x, eye.y, 3.2, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = '#ffffff';
-    ctx.beginPath();
-    ctx.arc(eye.x + direction.x, eye.y + direction.y, 1.1, 0, Math.PI * 2);
-    ctx.fill();
-  });
-
-  const tongueStart = {
-    x: head.x + direction.x * 9,
-    y: head.y + direction.y * 9
-  };
-  const tongueEnd = {
-    x: head.x + direction.x * 15,
-    y: head.y + direction.y * 15
-  };
-  ctx.strokeStyle = '#ff5ca8';
-  ctx.lineWidth = 1.5;
+  ctx.translate(head.x, head.y);
+  ctx.rotate(angle);
+  ctx.shadowColor = '#ff9fe8';
+  ctx.shadowBlur = 20;
+  ctx.fillStyle = '#ff7be3';
   ctx.beginPath();
-  ctx.moveTo(tongueStart.x, tongueStart.y);
-  ctx.lineTo(tongueEnd.x, tongueEnd.y);
-  ctx.lineTo(tongueEnd.x + side.x * 3, tongueEnd.y + side.y * 3);
-  ctx.moveTo(tongueEnd.x, tongueEnd.y);
-  ctx.lineTo(tongueEnd.x - side.x * 3, tongueEnd.y - side.y * 3);
+  ctx.moveTo(11, 0);
+  ctx.lineTo(-4, 8.5);
+  ctx.lineTo(-8, 0);
+  ctx.lineTo(-4, -8.5);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.shadowBlur = 0;
+  ctx.fillStyle = '#061326';
+  ctx.beginPath();
+  ctx.arc(2.5, -3.2, 2.2, 0, Math.PI * 2);
+  ctx.arc(2.5, 3.2, 2.2, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = '#ffffff';
+  ctx.beginPath();
+  ctx.arc(3.7, -3.2, 0.9, 0, Math.PI * 2);
+  ctx.arc(3.7, 3.2, 0.9, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.strokeStyle = '#ffb9f0';
+  ctx.lineWidth = 1.6;
+  ctx.beginPath();
+  ctx.moveTo(-6, 0);
+  ctx.lineTo(-12, 0);
   ctx.stroke();
   ctx.restore();
 }
@@ -258,7 +260,7 @@ function drawParticles() {
   particle.y += particle.vy;
   particle.life -= .035;
   ctx.globalAlpha = Math.max(particle.life, 0);
-  ctx.fillStyle = '#b8ff57';
+  ctx.fillStyle = particle.life > 0.5 ? '#8fe9ff' : '#b28dff';
   ctx.fillRect(particle.x, particle.y, particle.size, particle.size);
   });
   ctx.globalAlpha = 1;
