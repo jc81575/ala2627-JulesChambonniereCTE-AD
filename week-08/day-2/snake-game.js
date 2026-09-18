@@ -25,6 +25,7 @@ let food;
 let score;
 let bestScore = Number(localStorage.getItem(storageKey)) || 0;
 let speedMultiplier = 1;
+let speedLevel = 0;
 let gameState = 'ready';
 let lastStep = performance.now();
 let particles = [];
@@ -54,7 +55,7 @@ function randomFood() {
 
 function getCurrentSpeedFactor() {
   if (speedMultiplier === 1) {
-    return 1 + Math.min(2.2, score * 0.08);
+    return 1 + speedLevel * 0.1;
   }
   return speedMultiplier;
 }
@@ -159,9 +160,17 @@ function update() {
     if (score > bestScore) {
       bestScore = score;
       localStorage.setItem(storageKey, bestScore);
-  }
-  addParticles(food.x, food.y);
-  randomFood();
+    }
+
+    if (score % 4 === 0) {
+      speedLevel += 1;
+      if (speedMultiplier === 1) {
+        updateHud();
+      }
+    }
+
+    addParticles(food.x, food.y);
+    randomFood();
     updateHud();
   } else {
     snake.pop();
@@ -352,6 +361,9 @@ function drawFrame(timestamp) {
 
 function setSpeedMultiplier(multiplicator) {
   speedMultiplier = multiplicator;
+  if (multiplicator !== 1) {
+    speedLevel = 0;
+  }
   speedButtons.forEach(button => {
     const isActive = Number(button.dataset.speed) === multiplicator;
     button.classList.toggle('active', isActive);
