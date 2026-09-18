@@ -23,7 +23,7 @@ body {
   padding: 28px 16px;
   overflow-x: hidden;
   color: var(--text);
-  background: radial-gradient(circle at 50% -15%, #411010 0, #130606 30%, #050505 70%), var(--ink);
+  background: linear-gradient(180deg, #4d0909 0%, #190707 22%, #070707 58%, #000000 100%);
   font-family: "Trebuchet MS", sans-serif;
 }
 
