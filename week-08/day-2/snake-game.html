@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
@@ -13,20 +13,20 @@
     <header class="game-header">
       <div>
         <p class="eyebrow">ARCADE // 001</p>
-        <h1>NEON <span>SNAKE</span></h1>
+        <h1>NEON <span>DRAGON</span></h1>
       </div>
-      <button class="icon-button" id="pause-button" type="button" aria-label="Mettre en pause"
-        title="Pause (Espace)">Ⅱ</button>
+      <button class="icon-button" id="pause-button" type="button" aria-label="Pause game"
+        title="Pause (Space)">Ⅱ</button>
     </header>
 
-    <section class="game-card" aria-label="Jeu Snake">
+    <section class="game-card" aria-label="Snake game">
       <div class="scoreboard">
         <div class="stat"><span>Score</span><strong id="score">0</strong></div>
-        <div class="stat best"><span>Record</span><strong id="best-score">0</strong></div>
-        <div class="stat"><span>Vitesse</span><strong id="speed">1x</strong></div>
+        <div class="stat best"><span>Best</span><strong id="best-score">0</strong></div>
+        <div class="stat"><span>Speed</span><strong id="speed">1x</strong></div>
       </div>
 
-      <div class="speed-controls" aria-label="Contrôle de vitesse">
+      <div class="speed-controls" aria-label="Speed controls">
         <button class="speed-button" type="button" data-speed="0.5">0.5x</button>
         <button class="speed-button active" type="button" data-speed="1">1x</button>
         <button class="speed-button" type="button" data-speed="2">2x</button>
@@ -35,19 +35,19 @@
       <div class="canvas-wrap">
         <canvas id="game" width="400" height="400"></canvas>
         <div class="game-overlay" id="game-overlay">
-          <p class="overlay-kicker">PRÊT À JOUER ?</p>
-          <h2 id="overlay-title">Mange les pixels.</h2>
-          <p id="overlay-text">Utilise les flèches ou WASD pour te déplacer.</p>
-          <button class="primary-button" id="start-button" type="button">Lancer la partie</button>
+          <p class="overlay-kicker">READY?</p>
+          <h2 id="overlay-title">Choose your speed.</h2>
+          <p id="overlay-text">The game starts in 3 seconds.</p>
+          <button class="primary-button" id="start-button" type="button">Start now</button>
         </div>
       </div>
       <div class="game-footer">
-        <span><kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd> ou <kbd>WASD</kbd></span>
-        <span class="status"><i></i><span id="status-text">En attente</span></span>
+        <span><kbd>←</kbd><kbd>↑</kbd><kbd>↓</kbd><kbd>→</kbd> or <kbd>WASD</kbd></span>
+        <span class="status"><i></i><span id="status-text">Waiting</span></span>
       </div>
     </section>
 
-    <p class="mobile-hint">Glisse sur la zone de jeu pour diriger</p>
+    <p class="mobile-hint">Swipe on the game area to steer</p>
   </main>
 
   <script src="snake-game.js"></script>

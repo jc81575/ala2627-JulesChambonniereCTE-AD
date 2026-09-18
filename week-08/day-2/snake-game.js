@@ -29,6 +29,8 @@ let gameState = 'ready';
 let lastStep = performance.now();
 let particles = [];
 let touchStart = null;
+let readyStartedAt = 0;
+let readyCountdown = 3;
 
 function resetSnake() {
   snake = [
@@ -51,8 +53,9 @@ function randomFood() {
 }
 
 function stepDuration() {
-  const baseDuration = Math.max(78, 170 - score * 4);
-  return Math.max(35, baseDuration / speedMultiplier);
+  const baseDuration = Math.max(80, 170 - score * 4);
+  const acceleration = 1 + score * 0.08;
+  return Math.max(38, baseDuration / (speedMultiplier * acceleration));
 }
 
 function formatSpeed(value) {
@@ -72,13 +75,33 @@ function setOverlay(title, text, buttonText, visible) {
   overlay.classList.toggle('hidden', !visible);
 }
 
+function resetReadyCountdown() {
+  readyCountdown = 3;
+  readyStartedAt = performance.now();
+  setOverlay('Choose your speed.', `The game starts in ${readyCountdown}s.`, 'Start now', true);
+}
+
+function updateReadyCountdown() {
+  if (gameState !== 'ready' || readyCountdown <= 0) return;
+
+  const elapsed = (performance.now() - readyStartedAt) / 1000;
+  const remaining = Math.max(0, 3 - elapsed);
+  const remainingText = remaining <= 0 ? 'Starting now...' : `The game starts in ${Math.ceil(remaining)}s.`;
+  overlayText.textContent = `${remainingText} Current speed: ${formatSpeed(speedMultiplier)}.`;
+
+  if (remaining <= 0) {
+    readyCountdown = 0;
+    startGame();
+  }
+}
+
 function setState(state) {
   gameState = state;
-  const labels = { ready: 'En attente', playing: 'En jeu', paused: 'Pause', over: 'Partie terminée' };
+  const labels = { ready: 'Waiting', playing: 'Playing', paused: 'Paused', over: 'Game over' };
   statusText.textContent = labels[state];
   status.classList.toggle('playing', state === 'playing');
   pauseButton.textContent = state === 'paused' ? '▶' : 'Ⅱ';
-  pauseButton.setAttribute('aria-label', state === 'paused' ? 'Reprendre la partie' : 'Mettre en pause');
+  pauseButton.setAttribute('aria-label', state === 'paused' ? 'Resume the game' : 'Pause the game');
 }
 
 function startGame() {
@@ -94,7 +117,7 @@ function startGame() {
 
 function endGame() {
   setState('over');
-  setOverlay('Game over.', `Score final : ${score} — ton record est de ${bestScore}.`, 'Rejouer', true);
+  setOverlay('Game over.', `Final score: ${score} — your best is ${bestScore}.`, 'Play again', true);
 }
 
 function addParticles(x, y) {
@@ -305,6 +328,10 @@ function drawParticles() {
 }
 
 function drawFrame(timestamp) {
+  if (gameState === 'ready') {
+    updateReadyCountdown();
+  }
+
   if (gameState === 'playing' && timestamp - lastStep >= stepDuration()) {
     update();
     lastStep = timestamp;
@@ -324,6 +351,9 @@ function setSpeedMultiplier(multiplicator) {
     button.classList.toggle('active', isActive);
   });
   updateHud();
+  if (gameState === 'ready') {
+    resetReadyCountdown();
+  }
 }
 
 function changeDirection(newDirection) {
@@ -359,11 +389,17 @@ function togglePause() {
   lastStep = performance.now();
   } else {
     setState('paused');
-    setOverlay('Pause.', 'Le serpent attend ton prochain mouvement.', 'Reprendre', true);
+    setOverlay('Paused.', 'The serpent is waiting for your next move.', 'Resume', true);
   }
 }
 
-startButton.addEventListener('click', togglePause);
+startButton.addEventListener('click', () => {
+  if (gameState === 'ready' || gameState === 'over') {
+    startGame();
+  } else {
+    togglePause();
+  }
+});
 pauseButton.addEventListener('click', togglePause);
 speedButtons.forEach(button => {
   button.addEventListener('click', () => setSpeedMultiplier(Number(button.dataset.speed)));
@@ -391,4 +427,5 @@ score = 0;
 setSpeedMultiplier(1);
 updateHud();
 setState('ready');
+resetReadyCountdown();
 requestAnimationFrame(drawFrame);
