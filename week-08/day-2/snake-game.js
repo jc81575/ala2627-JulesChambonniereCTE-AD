@@ -52,10 +52,16 @@ function randomFood() {
   } while (snake.some(segment => segment.x === food.x && segment.y === food.y));
 }
 
+function getCurrentSpeedFactor() {
+  if (speedMultiplier === 1) {
+    return 1 + Math.min(2.2, score * 0.08);
+  }
+  return speedMultiplier;
+}
+
 function stepDuration() {
   const baseDuration = Math.max(80, 170 - score * 4);
-  const acceleration = 1 + score * 0.08;
-  return Math.max(38, baseDuration / (speedMultiplier * acceleration));
+  return Math.max(38, baseDuration / getCurrentSpeedFactor());
 }
 
 function formatSpeed(value) {
@@ -65,7 +71,7 @@ function formatSpeed(value) {
 function updateHud() {
   scoreEl.textContent = score;
   bestScoreEl.textContent = bestScore;
-  speedEl.textContent = formatSpeed(speedMultiplier);
+  speedEl.textContent = formatSpeed(getCurrentSpeedFactor());
 }
 
 function setOverlay(title, text, buttonText, visible) {
@@ -87,7 +93,7 @@ function updateReadyCountdown() {
   const elapsed = (performance.now() - readyStartedAt) / 1000;
   const remaining = Math.max(0, 3 - elapsed);
   const remainingText = remaining <= 0 ? 'Starting now...' : `The game starts in ${Math.ceil(remaining)}s.`;
-  overlayText.textContent = `${remainingText} Current speed: ${formatSpeed(speedMultiplier)}.`;
+  overlayText.textContent = `${remainingText} Current speed: ${formatSpeed(getCurrentSpeedFactor())}.`;
 
   if (remaining <= 0) {
     readyCountdown = 0;
