@@ -183,10 +183,19 @@ function drawSnake(progress) {
   ctx.save();
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
-  ctx.lineWidth = 16;
-  ctx.strokeStyle = '#3ad98f';
-  ctx.shadowColor = '#9bffd0';
+  ctx.lineWidth = 18;
+  ctx.strokeStyle = '#2a090d';
+  ctx.shadowColor = '#ff3d3d';
   ctx.shadowBlur = 16;
+  ctx.beginPath();
+  points.forEach((point, index) => {
+    if (index === 0) ctx.moveTo(point.x, point.y);
+    else ctx.lineTo(point.x, point.y);
+  });
+  ctx.stroke();
+
+  ctx.lineWidth = 10;
+  ctx.strokeStyle = '#ff4d4d';
   ctx.beginPath();
   points.forEach((point, index) => {
     if (index === 0) ctx.moveTo(point.x, point.y);
@@ -199,47 +208,79 @@ function drawSnake(progress) {
     const previous = previousSnake[index] || segment;
     const x = (previous.x + (segment.x - previous.x) * progress) * gridSize + gridSize / 2;
     const y = (previous.y + (segment.y - previous.y) * progress) * gridSize + gridSize / 2;
-    const radius = index === 0 ? 11.5 : Math.max(5, 9 - index * .08);
-    const fill = index === 0 ? '#9fffd0' : `hsl(${145 - index * 2}, 72%, ${58 - Math.min(index, 10) * 1.5}%)`;
+    const size = index === 0 ? 12 : 8.5 - index * 0.06;
+    const angle = index === 0 ? Math.atan2(direction.y, direction.x) : Math.atan2(
+      (segment.y - (previousSnake[index + 1]?.y ?? segment.y)) || 0,
+      (segment.x - (previousSnake[index + 1]?.x ?? segment.x)) || 0
+    );
+
     ctx.save();
-    ctx.shadowColor = index === 0 ? '#d8ffe9' : '#7af9bc';
+    ctx.translate(x, y);
+    ctx.rotate(angle);
+    ctx.shadowColor = index === 0 ? '#ffc1c1' : '#ff6b6b';
     ctx.shadowBlur = index === 0 ? 18 : 10;
-    ctx.fillStyle = fill;
+    ctx.fillStyle = index === 0 ? '#ff7a7a' : '#3f0a12';
     ctx.beginPath();
-    ctx.arc(x, y, radius, 0, Math.PI * 2);
+    ctx.moveTo(size * 0.9, 0);
+    ctx.lineTo(size * 0.35, size * 0.8);
+    ctx.lineTo(-size * 0.7, size * 0.55);
+    ctx.lineTo(-size * 0.95, 0);
+    ctx.lineTo(-size * 0.7, -size * 0.55);
+    ctx.lineTo(size * 0.35, -size * 0.8);
+    ctx.closePath();
     ctx.fill();
     ctx.restore();
   });
 
   const head = points[0];
-  const dirX = direction.x || 0;
-  const dirY = direction.y || 0;
-  const angle = Math.atan2(dirY, dirX);
+  const angle = Math.atan2(direction.y, direction.x);
 
   ctx.save();
   ctx.translate(head.x, head.y);
   ctx.rotate(angle);
-  ctx.shadowColor = '#b7ffe0';
+  ctx.shadowColor = '#ffb3b3';
   ctx.shadowBlur = 20;
-  ctx.fillStyle = '#99ffd6';
+
+  ctx.fillStyle = '#ff5656';
   ctx.beginPath();
-  ctx.moveTo(11, 0);
-  ctx.lineTo(3, 8);
-  ctx.lineTo(-5, 7);
-  ctx.lineTo(-10, 0);
-  ctx.lineTo(-5, -7);
-  ctx.lineTo(3, -8);
+  ctx.moveTo(13, 0);
+  ctx.lineTo(18, 5.5);
+  ctx.lineTo(10.5, 8.5);
+  ctx.lineTo(2, 7);
+  ctx.lineTo(-9, 0);
+  ctx.lineTo(2, -7);
+  ctx.lineTo(10.5, -8.5);
+  ctx.lineTo(18, -5.5);
   ctx.closePath();
   ctx.fill();
 
-  ctx.shadowBlur = 0;
-  ctx.fillStyle = '#041b12';
-  ctx.fillRect(-1.5, -5, 8, 3.2);
-  ctx.fillRect(-1.5, 1.8, 8, 3.2);
+  ctx.fillStyle = '#34070a';
+  ctx.beginPath();
+  ctx.moveTo(18, 0);
+  ctx.lineTo(24, 4.5);
+  ctx.lineTo(24, -4.5);
+  ctx.closePath();
+  ctx.fill();
 
-  ctx.fillStyle = '#ebfff8';
-  ctx.fillRect(2.2, -4.2, 2.6, 1.5);
-  ctx.fillRect(2.2, 2.7, 2.6, 1.5);
+  ctx.fillStyle = '#1a0204';
+  ctx.beginPath();
+  ctx.moveTo(-3, -7.5);
+  ctx.lineTo(4, -10.5);
+  ctx.lineTo(2, -3.5);
+  ctx.closePath();
+  ctx.moveTo(-3, 7.5);
+  ctx.lineTo(4, 10.5);
+  ctx.lineTo(2, 3.5);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.fillStyle = '#ffebeb';
+  ctx.fillRect(2, -4.5, 9, 2.2);
+  ctx.fillRect(2, 2.3, 9, 2.2);
+
+  ctx.fillStyle = '#ff1a1a';
+  ctx.fillRect(8, -4.2, 4.5, 1.2);
+  ctx.fillRect(8, 3, 4.5, 1.2);
   ctx.restore();
 }
 
@@ -250,7 +291,7 @@ function drawParticles() {
   particle.y += particle.vy;
   particle.life -= .035;
   ctx.globalAlpha = Math.max(particle.life, 0);
-  ctx.fillStyle = particle.life > 0.5 ? '#8fe9ff' : '#b28dff';
+  ctx.fillStyle = particle.life > 0.5 ? '#ff8c8c' : '#7a0f16';
   ctx.fillRect(particle.x, particle.y, particle.size, particle.size);
   });
   ctx.globalAlpha = 1;
