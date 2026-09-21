@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PI / DEEP FIELD</title>
+  <meta name="description" content="Cherche une suite de chiffres dans les decimales de pi.">
+  <link rel="stylesheet" href="pi.css">
+</head>
+
+<body>
+  <div class="starfield" aria-hidden="true"></div>
+  <div class="nebula nebula-one" aria-hidden="true"></div>
+  <div class="nebula nebula-two" aria-hidden="true"></div>
+
+  <main class="site-shell">
+    <nav class="topbar" aria-label="Navigation principale">
+      <a class="brand" href="index.html"><span class="brand-mark">&#960;</span> DEEP FIELD</a>
+      <span class="topbar-note">PI / OBSERVATORY 001</span>
+      <a class="back-link" href="index.html">RETOUR <span aria-hidden="true">&#8599;</span></a>
+    </nav>
+
+    <header class="hero">
+      <p class="eyebrow"><span class="live-dot"></span> Exploration numerique en cours</p>
+      <h1>Votre nombre<br><em>est-il dans pi ?</em></h1>
+      <p class="intro">Entrez une suite de chiffres. Nous allons la chercher dans les decimales connues de la constante
+        la plus celebre de l'univers.</p>
+    </header>
+
+    <section class="search-panel" aria-labelledby="search-title">
+      <div class="panel-heading">
+        <div>
+          <span class="section-index">01 / SEARCH</span>
+          <h2 id="search-title">Lancer une recherche</h2>
+        </div>
+        <span class="capacity" id="capacity">Base en attente</span>
+      </div>
+
+      <form id="search-form" class="search-form">
+        <label for="number-input">Votre nombre</label>
+        <div class="input-row">
+          <input id="number-input" name="number" type="text" inputmode="decimal" autocomplete="off"
+            placeholder="ex. 123456789" maxlength="80">
+          <button type="submit">Explorer <span aria-hidden="true">&#8594;</span></button>
+        </div>
+        <p class="field-note">Les espaces, points et virgules sont ignores. 80 chiffres maximum par recherche.</p>
+      </form>
+
+      <div id="result" class="result" aria-live="polite" aria-atomic="true">
+        <span class="result-orbit" aria-hidden="true"></span>
+        <p class="result-kicker">En attente d'un signal</p>
+        <p class="result-copy">La reponse apparaitra ici.</p>
+      </div>
+    </section>
+
+    <section class="facts" aria-label="Informations sur l'exploration">
+      <article>
+        <span class="fact-number">&#8734;</span>
+        <p>Les decimales de pi sont infinies.</p>
+      </article>
+      <article>
+        <span class="fact-number">80M</span>
+        <p>Decimales visees par cette experience.</p>
+      </article>
+      <article>
+        <span class="fact-number">01</span>
+        <p>Une suite, une position, une trace.</p>
+      </article>
+    </section>
+
+    <footer>
+      <span>PI DEEP FIELD / 2026</span>
+      <span>NOTHING IS RANDOM UNTIL PROVEN OTHERWISE</span>
+    </footer>
+  </main>
+
+  <script src="pi.js"></script>
+</body>
+
+</html>
