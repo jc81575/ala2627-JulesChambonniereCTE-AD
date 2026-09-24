@@ -1,5 +1,5 @@
 const FALLBACK_PI = '1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679';
-const TARGET_DIGITS = 80000000;
+const TARGET_DIGITS = 1000000;
 
 const form = document.querySelector('#search-form');
 const input = document.querySelector('#number-input');
@@ -17,7 +17,11 @@ function showCapacity() {
 }
 
 function normalize(value) {
-  return value.replace(/[.,\s]/g, '').replace(/^\+/, '');
+  const trimmed = value.trim().replace(/^\+/, '');
+  const decimalPi = trimmed.match(/^3[.,]\s*(\d+)$/);
+
+  if (decimalPi) return decimalPi[1];
+  return trimmed.replace(/[.,\s]/g, '');
 }
 
 function showResult(kicker, message, state = '') {
@@ -28,7 +32,7 @@ function showResult(kicker, message, state = '') {
 
 async function loadPiDigits() {
   try {
-    const response = await fetch('pi-80m.txt', { cache: 'force-cache' });
+    const response = await fetch('pi-1m.txt', { cache: 'force-cache' });
     if (!response.ok) throw new Error('digits unavailable');
     const text = (await response.text()).replace(/\D/g, '');
     if (text.length < FALLBACK_PI.length) throw new Error('digits incomplete');
