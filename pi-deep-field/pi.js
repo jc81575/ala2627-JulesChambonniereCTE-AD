@@ -64,7 +64,9 @@ form.addEventListener('submit', (event) => {
   const start = Math.max(0, position - 10);
   const end = Math.min(piDigits.length, position + query.length + 10);
   const context = piDigits.slice(start, end);
-  showResult('Correspondance trouvee', `<strong>${query}</strong> apparait a la position <strong>${displayPosition.toLocaleString('fr-FR')}</strong> apres la virgule.<br><small>Contexte : ...${context}...</small>`, 'found');
+  const matchIndexInContext = position - start;
+  const highlightedContext = `${context.slice(0, matchIndexInContext)}<mark>${query}</mark>${context.slice(matchIndexInContext + query.length)}`;
+  showResult('Correspondance trouvee', `<strong>${query}</strong> apparait a la position <strong>${displayPosition.toLocaleString('fr-FR')}</strong> apres la virgule.<br><small>Contexte : ...${highlightedContext}...</small>`, 'found');
 });
 
 showCapacity();

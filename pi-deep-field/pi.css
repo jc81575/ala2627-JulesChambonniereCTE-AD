@@ -318,11 +318,24 @@ button:hover {
 }
 
 .result.found {
-  border-color: rgba(255, 111, 174, .6);
+  border-color: rgba(92, 255, 165, .9);
+  box-shadow: inset 0 0 0 1px rgba(92, 255, 165, .5);
 }
 
 .result.found .result-kicker {
-  color: var(--pink);
+  color: #7af7b0;
+}
+
+.result-copy mark {
+  display: inline-block;
+  padding: .02em .18em;
+  border: 1px solid rgba(92, 255, 165, .9);
+  background: rgba(92, 255, 165, .18);
+  color: #dfffee;
+  border-radius: .2em;
+  box-shadow: 0 0 0 .15rem rgba(92, 255, 165, .08);
+  font-family: 'DM Mono', monospace;
+  font-weight: 600;
 }
 
 .result.error {
