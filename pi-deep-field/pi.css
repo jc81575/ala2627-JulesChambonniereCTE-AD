@@ -328,14 +328,16 @@ button:hover {
 
 .result-copy mark {
   display: inline-block;
-  padding: .02em .18em;
-  border: 1px solid rgba(92, 255, 165, .9);
-  background: rgba(92, 255, 165, .18);
-  color: #dfffee;
-  border-radius: .2em;
-  box-shadow: 0 0 0 .15rem rgba(92, 255, 165, .08);
+  padding: .08em .24em;
+  border: 1px solid rgba(103, 255, 176, 1);
+  background: linear-gradient(180deg, rgba(122, 247, 176, 1), rgba(57, 220, 126, 1));
+  color: #041b12;
+  border-radius: .24em;
+  box-shadow: 0 0 0 .12rem rgba(122, 247, 176, .18), 0 .25rem .7rem rgba(57, 220, 126, .45);
   font-family: 'DM Mono', monospace;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: .02em;
+  transform: translateY(-.04em);
 }
 
 .result.error {
