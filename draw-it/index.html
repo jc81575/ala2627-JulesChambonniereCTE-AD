@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071522">
+  <meta name="description"
+    content="Draw It : un atelier 3D pour explorer les articulations, les muscles et les poses du corps humain.">
+  <title>Draw It — Anatomie en mouvement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script
+    type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"}}</script>
+  <script type="module" src="app.js"></script>
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="#top" aria-label="Draw It, accueil">draw<span>it</span><i>.</i></a>
+    <nav aria-label="Navigation principale"><a href="#anatomie">Anatomie</a><a href="#atelier">Atelier</a><a
+        href="#sources">Références</a></nav>
+    <a class="topbar-cta" href="#atelier">Ouvrir l’atelier <span>↘</span></a>
+  </header>
+
+  <main>
+    <section class="hero marble" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-rule"></span> L’anatomie comme outil de dessin</p>
+        <h1 id="hero-title">Draw <em>it.</em></h1>
+        <p class="hero-description">Le corps en mouvement. Explore les articulations, construis une pose, tourne autour
+          du modèle. Observe la structure avant de tracer la ligne.</p>
+        <a class="gold-link" href="#atelier">Entrer dans l’atelier <span>↓</span></a>
+        <p class="hero-caption">UN MODÈLE 3D. DES POSSIBILITÉS INFINIES.</p>
+      </div>
+      <div class="hero-figure" aria-label="Squelette 3D en T avec muscles apparaissant progressivement">
+        <div class="figure-label figure-label-top"><span>01</span> STRUCTURE</div>
+        <div id="hero-view" class="scene-host hero-scene"></div>
+        <div class="figure-label figure-label-bottom"><span class="live-dot"></span> APERÇU ANATOMIQUE</div>
+        <div class="figure-crosshair" aria-hidden="true">+</div>
+      </div>
+      <div class="hero-index" aria-hidden="true">D / I<br><span>ANATOMIE · 01</span></div>
+    </section>
+
+    <section class="intro-strip" id="anatomie" aria-label="À propos de l’outil">
+      <p><span class="strip-number">01</span> Observer</p>
+      <p><span class="strip-number">02</span> Articuler</p>
+      <p><span class="strip-number">03</span> Dessiner</p>
+      <span class="strip-note">Un modèle d’étude, pas un diagnostic médical.</span>
+    </section>
+
+    <section class="studio-section" id="atelier" aria-labelledby="studio-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow"><span class="eyebrow-rule"></span> 02 — Espace de travail</p>
+          <h2 id="studio-title">Compose ta <em>pose.</em></h2>
+        </div>
+        <p class="section-heading-note">Sélectionne une articulation, règle ses angles, puis observe le corps sous tous
+          les points de vue.</p>
+      </div>
+      <div class="workbench">
+        <aside class="control-panel" aria-label="Commandes du modèle">
+          <div class="control-section">
+            <div class="control-heading"><span>01</span>
+              <h3>Poses de départ</h3>
+            </div>
+            <div class="pose-buttons" role="group" aria-label="Choisir une pose de départ">
+              <button class="pose-button is-active" type="button" data-pose="t-pose">En T</button><button
+                class="pose-button" type="button" data-pose="relaxed">Détendue</button>
+              <button class="pose-button" type="button" data-pose="stride">Marche</button><button class="pose-button"
+                type="button" data-pose="sit">Assise</button>
+            </div>
+          </div>
+          <div class="control-section">
+            <div class="control-heading"><span>02</span>
+              <h3>Articulations</h3>
+            </div>
+            <label class="field-label" for="joint-select">Articulation sélectionnée</label>
+            <select id="joint-select" class="select-control">
+              <optgroup label="Côté gauche">
+                <option value="shoulder-L">Épaule gauche</option>
+                <option value="elbow-L">Coude gauche</option>
+                <option value="wrist-L">Poignet gauche</option>
+                <option value="hip-L">Hanche gauche</option>
+                <option value="knee-L">Genou gauche</option>
+                <option value="ankle-L">Cheville gauche</option>
+              </optgroup>
+              <optgroup label="Côté droit">
+                <option value="shoulder-R">Épaule droite</option>
+                <option value="elbow-R">Coude droit</option>
+                <option value="wrist-R">Poignet droit</option>
+                <option value="hip-R">Hanche droite</option>
+                <option value="knee-R">Genou droit</option>
+                <option value="ankle-R">Cheville droite</option>
+              </optgroup>
+            </select>
+            <div id="joint-sliders" class="joint-sliders"></div>
+            <p class="joint-hint">Les côtés gauche et droit correspondent au corps du modèle.</p>
+          </div>
+          <div class="control-section muscle-section">
+            <div class="control-heading control-heading-spread">
+              <div class="control-heading"><span>03</span>
+                <h3>Muscles</h3>
+              </div><button id="toggle-all-muscles" class="text-button" type="button">Tout afficher</button>
+            </div>
+            <p class="section-hint">Superpose des groupes musculaires au squelette.</p>
+            <div id="muscle-list" class="muscle-list" aria-label="Groupes musculaires"></div>
+          </div>
+        </aside>
+
+        <div class="model-workspace">
+          <div class="model-toolbar"><span class="model-mode"><span class="live-dot"></span> ÉTUDE 3D <span
+                class="toolbar-divider">/</span> VUE LIBRE</span>
+            <div class="toolbar-actions"><button id="reset-pose" class="icon-button" type="button"
+                title="Réinitialiser la pose" aria-label="Réinitialiser la pose">↺</button><button id="capture-pose"
+                class="capture-button" type="button"><span>◉</span> Capturer la pose</button></div>
+          </div>
+          <div class="model-stage">
+            <div id="studio-view" class="scene-host studio-scene" role="img"
+              aria-label="Modèle 3D du squelette à manipuler"></div>
+            <div class="stage-axis" aria-hidden="true"><span>ANT.</span><span
+                class="axis-line"></span><span>POST.</span></div>
+            <div class="stage-coordinate" aria-hidden="true">X&nbsp; 00.0<br>Y&nbsp; 00.0<br>Z&nbsp; 00.0</div>
+            <div class="stage-tip"><span class="mouse-symbol">⌖</span> Glisser pour orbiter <span>·</span> Molette pour
+              zoomer</div>
+            <div id="capture-message" class="capture-message" role="status" aria-live="polite"></div>
+          </div>
+          <div class="model-footer"><span>VUE ORBITALE <b>●</b> 360°</span><span id="muscle-status">SQUELETTE · 0 GROUPE
+              MUSCULAIRE</span><span>ÉCHELLE <strong>1 : 1</strong></span></div>
+        </div>
+      </div>
+      <p class="model-disclaimer">Les volumes musculaires sont des repères simplifiés inspirés des insertions
+        anatomiques : ils ne montrent ni toutes les couches, ni les variations individuelles.</p>
+    </section>
+
+    <section class="sources-section" id="sources" aria-labelledby="sources-title">
+      <div>
+        <p class="eyebrow"><span class="eyebrow-rule"></span> Pour aller plus loin</p>
+        <h2 id="sources-title">Anatomie <em>documentée.</em></h2>
+      </div>
+      <p class="sources-copy">Les noms des muscles et les régions représentées s’appuient sur des ressources
+        pédagogiques d’anatomie. Le modèle 3D reste une simplification destinée à l’étude du dessin.</p>
+      <div class="source-links">
+        <a href="https://openstax.org/books/anatomy-and-physiology-2e/pages/11-introduction" target="_blank"
+          rel="noreferrer">OpenStax · Système musculaire <span>↗</span></a>
+        <a href="https://openstax.org/books/anatomy-and-physiology-2e/pages/11-3-axial-muscles-of-the-head-neck-and-back"
+          target="_blank" rel="noreferrer">Muscles axiaux <span>↗</span></a>
+        <a href="https://openstax.org/books/anatomy-and-physiology-2e/pages/11-5-muscles-of-the-pectoral-girdle-and-upper-limbs"
+          target="_blank" rel="noreferrer">Épaule et membre supérieur <span>↗</span></a>
+        <a href="https://openstax.org/books/anatomy-and-physiology-2e/pages/11-6-appendicular-muscles-of-the-pelvic-girdle-and-lower-limbs"
+          target="_blank" rel="noreferrer">Bassin et membre inférieur <span>↗</span></a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><a class="wordmark" href="#top">draw<span>it</span><i>.</i></a>
+    <p>Étudier le mouvement, une articulation à la fois.</p><span>ANATOMIE POUR DESSINATEURS · 2026</span>
+  </footer>
+</body>
+
+</html>
