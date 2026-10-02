@@ -4,13 +4,13 @@ import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.180.0/exampl
 const BONE = 0xe1d6bc;
 const SIDES = ["L", "R"];
 const muscles = [
-  ["deltoid", "Deltoïde", "Deltoideus"], ["pectoralis", "Grand pectoral", "Pectoralis major"],
-  ["trapezius", "Trapèze", "Trapezius"], ["biceps", "Biceps brachial", "Biceps brachii"],
-  ["triceps", "Triceps brachial", "Triceps brachii"], ["forearm", "Fléchisseurs de l’avant-bras", "Flexores antebrachii"],
-  ["rectus", "Droit de l’abdomen", "Rectus abdominis"], ["obliques", "Obliques externes", "Obliquus externus"],
+  ["deltoid", "Deltoid", "Deltoideus"], ["pectoralis", "Pectoralis major", "Pectoralis major"],
+  ["trapezius", "Trapezius", "Trapezius"], ["biceps", "Biceps brachii", "Biceps brachii"],
+  ["triceps", "Triceps brachii", "Triceps brachii"], ["forearm", "Forearm flexors", "Flexores antebrachii"],
+  ["rectus", "Rectus abdominis", "Rectus abdominis"], ["obliques", "External obliques", "Obliquus externus"],
   ["gluteus", "Grand fessier", "Gluteus maximus"], ["quadriceps", "Quadriceps", "Quadriceps femoris"],
-  ["hamstrings", "Ischio-jambiers", "Hamstrings"], ["gastrocnemius", "Gastrocnémien", "Gastrocnemius"],
-  ["tibialis", "Tibial antérieur", "Tibialis anterior"],
+  ["hamstrings", "Hamstrings", "Hamstrings"], ["gastrocnemius", "Gastrocnemius", "Gastrocnemius"],
+  ["tibialis", "Tibialis anterior", "Tibialis anterior"],
 ].map(([id, name, latin]) => ({ id, name, latin }));
 const visibleMuscles = Object.fromEntries(muscles.map(({ id }) => [id, false]));
 
@@ -222,8 +222,8 @@ function init() {
   let hero, studio;
   try { hero = makeView(heroHost, true); studio = makeView(studioHost); }
   catch (error) {
-    console.error("Impossible d’initialiser la scène Three.js", error);
-    for (const host of [heroHost, studioHost]) host.innerHTML = "<p class='webgl-error'>La scène 3D n’a pas pu démarrer. Vérifie WebGL et la connexion à Three.js.</p>";
+    console.error("Unable to initialize the Three.js scene", error);
+    for (const host of [heroHost, studioHost]) host.innerHTML = "<p class='webgl-error'>The 3D scene could not start. Check WebGL and your connection to Three.js.</p>";
     return;
   }
 
@@ -239,11 +239,11 @@ function init() {
   }
   function updateStatus() {
     const count = Object.values(visibleMuscles).filter(Boolean).length;
-    status.textContent = `SQUELETTE · ${count} GROUPE${count === 1 ? "" : "S"} MUSCULAIRE${count === 1 ? "" : "S"}`;
-    document.querySelector("#toggle-all-muscles").textContent = count === muscles.length ? "Tout masquer" : "Tout afficher";
+    status.textContent = `SKELETON · ${count} MUSCLE GROUP${count === 1 ? "" : "S"}`;
+    document.querySelector("#toggle-all-muscles").textContent = count === muscles.length ? "Hide all" : "Show all";
   }
   const sliderSpec = {
-    shoulder: [["lift", "Élévation", -100, 130], ["swing", "Rotation avant / arrière", -90, 90]],
+    shoulder: [["lift", "Elevation", -100, 130], ["swing", "Forward / backward rotation", -90, 90]],
     elbow: [["bend", "Flexion", 0, 145]], wrist: [["bend", "Flexion", -75, 75]],
     hip: [["flex", "Flexion", -40, 120]], knee: [["bend", "Flexion", 0, 140]], ankle: [["bend", "Flexion", -30, 45]],
   };
@@ -254,7 +254,7 @@ function init() {
       const heading = document.createElement("label"); heading.className = "slider-heading"; heading.htmlFor = `angle-${key}`;
       heading.innerHTML = `<span>${label}</span><span class="slider-value">${pose[group][side][key]}°</span>`;
       const input = document.createElement("input"); input.id = `angle-${key}`; input.type = "range"; input.min = min; input.max = max; input.value = pose[group][side][key];
-      input.setAttribute("aria-label", `${label}, côté ${side === "L" ? "gauche" : "droit"}`);
+      input.setAttribute("aria-label", `${label}, ${side === "L" ? "left" : "right"} side`);
       input.addEventListener("input", () => { pose[group][side][key] = Number(input.value); heading.lastElementChild.textContent = `${input.value}°`; });
       row.append(heading, input); sliders.append(row);
     }
@@ -285,11 +285,11 @@ function init() {
   document.querySelector("#capture-pose").addEventListener("click", () => {
     const message = document.querySelector("#capture-message");
     studio.renderer.domElement.toBlob((blob) => {
-      if (!blob) { message.textContent = "Capture indisponible dans ce navigateur."; }
+      if (!blob) { message.textContent = "Capture is unavailable in this browser."; }
       else {
         const url = URL.createObjectURL(blob), link = document.createElement("a");
         link.href = url; link.download = "draw-it-pose.png"; link.click(); URL.revokeObjectURL(url);
-        message.textContent = "Pose capturée · draw-it-pose.png";
+        message.textContent = "Pose captured · draw-it-pose.png";
       }
       message.classList.add("is-visible"); window.setTimeout(() => message.classList.remove("is-visible"), 2400);
     }, "image/png");
