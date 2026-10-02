@@ -110,17 +110,18 @@ input:focus-visible {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background-color: var(--navy-900);
-  background-image: radial-gradient(ellipse at 69% 42%, transparent 12%, rgba(12, 37, 56, .44) 12.3%, transparent 12.8%, transparent 25%, rgba(190, 158, 100, .08) 25.3%, transparent 25.8%), radial-gradient(ellipse at 78% 55%, transparent 21%, rgba(109, 138, 152, .1) 21.2%, transparent 21.8%, transparent 32%, rgba(202, 169, 111, .08) 32.2%, transparent 32.8%), linear-gradient(116deg, transparent 0 42%, rgba(151, 176, 187, .055) 42.12%, transparent 42.35% 56%, rgba(197, 166, 106, .055) 56.1%, transparent 56.38%), radial-gradient(ellipse at 79% 42%, #122b3d 0, #0c1e2c 42%, #091724 74%)
+  background-color: #071522;
+  background-image: linear-gradient(90deg, rgba(5, 15, 25, .96) 0%, rgba(6, 19, 31, .88) 37%, rgba(6, 20, 32, .48) 64%, rgba(5, 16, 27, .18) 100%), radial-gradient(ellipse at 76% 48%, #1b4055 0, #102c40 35%, #091b2a 70%), repeating-conic-gradient(from 205deg at 72% 48%, transparent 0deg 12deg, rgba(218, 185, 119, .22) 12.15deg, rgba(218, 185, 119, .035) 12.5deg, transparent 13deg 29deg), linear-gradient(128deg, transparent 0 53%, rgba(121, 159, 174, .11) 53.2%, transparent 53.6% 68%, rgba(211, 178, 111, .12) 68.15%, transparent 68.5%);
 }
 
 .marble::before {
   position: absolute;
   z-index: -1;
   inset: 0;
-  background: repeating-linear-gradient(163deg, transparent 0 37px, rgba(172, 187, 185, .035) 38px, transparent 39px 97px);
+  background: repeating-conic-gradient(from 18deg at 82% 54%, transparent 0deg 17deg, rgba(223, 196, 140, .24) 17.12deg, rgba(223, 196, 140, .055) 17.38deg, transparent 17.75deg 41deg), repeating-radial-gradient(ellipse at 78% 51%, transparent 0 67px, rgba(133, 169, 181, .1) 69px, rgba(223, 196, 140, .15) 71px, transparent 74px 128px);
   content: "";
-  mask-image: linear-gradient(90deg, transparent 25%, #000 73%);
+  mask-image: linear-gradient(90deg, transparent 28%, #000 62%), radial-gradient(ellipse at 79% 52%, #000 6%, transparent 80%);
+  mask-composite: intersect;
   pointer-events: none
 }
 
