@@ -8,7 +8,7 @@
   --muted: #9babb6;
   --line: rgba(207, 187, 144, .2);
   --sans: "DM Sans", "Manrope", sans-serif;
-  --serif: "Playfair Display", Georgia, serif
+  --serif: "Cormorant Garamond", Georgia, serif
 }
 
 *,
@@ -1154,6 +1154,266 @@ input[type=range]::-moz-range-thumb {
 
   .capture-button {
     padding: 0 .4rem;
+    font-size: .55rem
+  }
+}
+
+body {
+  background: #f0ede5;
+  color: #172b38
+}
+
+.marble {
+  min-height: 780px;
+  height: min(940px, 100vh);
+  background-color: #071522;
+  background-image: linear-gradient(90deg, rgba(4, 15, 26, .96) 0%, rgba(5, 18, 30, .9) 31%, rgba(5, 18, 30, .65) 57%, rgba(5, 18, 30, .35) 100%), linear-gradient(180deg, rgba(4, 14, 24, .24), rgba(4, 14, 24, .08) 55%, rgba(4, 14, 24, .48)), url("marble.jpg");
+  background-position: center, center, 65% 47%;
+  background-size: cover;
+  background-repeat: no-repeat
+}
+
+.marble::before {
+  display: block;
+  background: url("gold-veins.svg") center / cover no-repeat;
+  opacity: .62;
+  mask-image: linear-gradient(90deg, transparent 10%, #000 47%);
+  pointer-events: none
+}
+
+.hero {
+  min-height: 780px;
+  height: min(940px, 100vh);
+  padding-top: 10rem;
+  padding-bottom: 6rem
+}
+
+h1 {
+  font-size: 6.2rem
+}
+
+.hero-description {
+  color: #d0d6d6
+}
+
+.hero-figure {
+  filter: drop-shadow(0 16px 50px rgba(2, 10, 16, .24))
+}
+
+.intro-strip {
+  min-height: 112px;
+  background: #f8f5ee;
+  border-color: #d8d0c0
+}
+
+.intro-strip p {
+  color: #203440;
+  font-size: .88rem
+}
+
+.strip-number {
+  color: #a77d38
+}
+
+.strip-note {
+  color: #68777a
+}
+
+.studio-section {
+  padding-top: 6.5rem;
+  background: #ece8df
+}
+
+.section-heading h2,
+.sources-section h2 {
+  color: #172b38
+}
+
+.section-heading h2 em,
+.sources-section h2 em {
+  color: #9a702f
+}
+
+.studio-section .eyebrow,
+.sources-section .eyebrow {
+  color: #876126
+}
+
+.studio-section .eyebrow-rule,
+.sources-section .eyebrow-rule {
+  background: #a77d38
+}
+
+.section-heading-note {
+  color: #596a70
+}
+
+.workbench {
+  border-color: rgba(39, 55, 61, .2);
+  background: #f8f6f0;
+  box-shadow: 0 22px 56px rgba(31, 41, 40, .08)
+}
+
+.control-panel {
+  border-color: rgba(39, 55, 61, .16)
+}
+
+.control-section {
+  border-color: rgba(39, 55, 61, .13)
+}
+
+.control-heading h3,
+.muscle-toggle:hover,
+.muscle-toggle[aria-pressed=true] {
+  color: #203440
+}
+
+.control-heading>span,
+.strip-number {
+  color: #9b712e
+}
+
+.field-label,
+.joint-hint,
+.section-hint,
+.muscle-latin {
+  color: #68777a
+}
+
+.pose-button {
+  border-color: rgba(39, 55, 61, .22);
+  color: #53656b
+}
+
+.pose-button:hover,
+.pose-button.is-active {
+  border-color: #a77d38;
+  color: #76551f
+}
+
+.pose-button.is-active {
+  background: rgba(197, 166, 106, .16)
+}
+
+.select-control {
+  border-color: rgba(39, 55, 61, .24);
+  background: #fffdf8;
+  color: #203440
+}
+
+.slider-heading,
+.muscle-toggle {
+  color: #53656b
+}
+
+.slider-value,
+.source-links a span {
+  color: #8a6428
+}
+
+.muscle-toggle {
+  border-color: rgba(39, 55, 61, .12)
+}
+
+.text-button {
+  color: #8b672d
+}
+
+.model-toolbar,
+.model-footer {
+  background: #0a1a28
+}
+
+.model-disclaimer {
+  color: #5c6b70
+}
+
+.sources-section {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  border-color: #d8d0c0;
+  background-color: #f8f5ee;
+  background-image: linear-gradient(135deg, rgba(204, 190, 162, .18), transparent 58%)
+}
+
+.sources-copy {
+  color: #596a70
+}
+
+.source-links {
+  border-color: #d8d0c0
+}
+
+.source-links a {
+  border-color: #e2dccf;
+  color: #35494f
+}
+
+.source-links a:hover {
+  color: #8a6428
+}
+
+.site-footer {
+  background: #071522
+}
+
+.texture-credit {
+  color: #b7aa8d;
+  font-size: .58rem;
+  text-decoration-color: rgba(197, 166, 106, .45);
+  text-underline-offset: .25rem
+}
+
+@media(max-width:1000px) {
+
+  .marble,
+  .hero {
+    min-height: 700px
+  }
+
+  h1 {
+    font-size: 5.4rem
+  }
+}
+
+@media(max-width:720px) {
+
+  .marble,
+  .hero {
+    min-height: unset;
+    height: auto
+  }
+
+  .marble {
+    background-image: linear-gradient(90deg, rgba(4, 15, 26, .9), rgba(5, 18, 30, .62)), linear-gradient(180deg, rgba(4, 14, 24, .14), rgba(4, 14, 24, .3)), url("marble.jpg");
+    background-position: center, center, 60% center;
+    background-size: cover
+  }
+
+  .hero {
+    padding-top: 7.5rem;
+    padding-bottom: 2.5rem
+  }
+
+  h1 {
+    font-size: 4.5rem
+  }
+
+  .intro-strip {
+    background: #f8f5ee
+  }
+
+  .studio-section {
+    background: #ece8df
+  }
+
+  .site-footer {
+    gap: .8rem 1rem
+  }
+
+  .texture-credit {
+    order: 2;
+    width: 100%;
     font-size: .55rem
   }
 }

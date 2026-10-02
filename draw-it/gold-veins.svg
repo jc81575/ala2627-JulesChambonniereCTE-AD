@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="gold" x1="760" y1="40" x2="1370" y2="840" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f1d79b"/>
+      <stop offset=".48" stop-color="#b78a43"/>
+      <stop offset="1" stop-color="#e4c780"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+  <g stroke="#d4ad63" stroke-linecap="round" stroke-linejoin="round" opacity=".34" filter="url(#glow)" stroke-width="9">
+    <path d="M1017-38c-55 76 80 122 21 197s-64 105 22 159-37 112-5 174-68 101-8 166-46 119 28 185-3 88 16 113"/>
+    <path d="M1392-35c-53 66-146 85-125 155s-86 100-48 168 122 94 77 162 58 100 28 164 62 104 22 168 34 79 28 130"/>
+    <path d="M779 270c89 18 122 87 86 144s-4 94 58 110 90 59 64 112"/>
+    <path d="M1016 159c-109 8-132 51-195 41s-80 45-116 69 5 53-74 73"/>
+    <path d="M1046 462c-86-11-108 49-165 57s-82 55-136 53-73 41-115 59"/>
+  </g>
+  <g stroke="url(#gold)" stroke-linecap="round" stroke-linejoin="round" opacity=".82" stroke-width="2.2">
+    <path d="M1017-38c-55 76 80 122 21 197s-64 105 22 159-37 112-5 174-68 101-8 166-46 119 28 185-3 88 16 113"/>
+    <path d="M1392-35c-53 66-146 85-125 155s-86 100-48 168 122 94 77 162 58 100 28 164 62 104 22 168 34 79 28 130"/>
+    <path d="M779 270c89 18 122 87 86 144s-4 94 58 110 90 59 64 112"/>
+    <path d="M1016 159c-109 8-132 51-195 41s-80 45-116 69 5 53-74 73"/>
+    <path d="M1046 462c-86-11-108 49-165 57s-82 55-136 53-73 41-115 59"/>
+  </g>
+</svg>
